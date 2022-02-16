@@ -7,6 +7,10 @@ const SideBar = () => {
       title: "Year",
       content: [
         {
+          field: "2015",
+          checked: "checked",
+        },
+        {
           field: "2016",
           checked: "checked",
         },

@@ -22,6 +22,7 @@ import {Timeline} from "react-twitter-widgets";
 const ItemDetails02 = () => {
     const {id} = useParams();
     const nftData = useFetch(`https://pixelmap.art/nfts/${id}.json`);
+    const priceData = useFetch(`https://pixelmap.art/nfts/prices.json`);
     console.log(nftData)
     const [dataHistory] = useState(
         [
@@ -161,8 +162,12 @@ const ItemDetails02 = () => {
                                                     <span className="heading">Current Floor</span>
                                                     <div className="price">
                                                         <div className="price-box">
-                                                            <h5> 1.8 ETH</h5>
-                                                            <span> ($5,157.93)</span>
+                                                            {priceData && priceData.filter(nft => nft.name == nftData.title).map(filteredNFT => (
+                                                                <>
+                                                            <h5> {filteredNFT.stats.floor_price} ETH</h5>
+                                                            <span> (${Number(filteredNFT.stats.floor_price * 3136.89).toLocaleString()})</span>
+                                                                </>
+                                                            ))}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -51,6 +51,7 @@ const ItemContent = () => {
   ]);
 
   const nftData = useFetch("https://pixelmap.art/nfts/all.json");
+  const prices = useFetch("https://pixelmap.art/nfts/prices.json");
 
   const [visible, setVisible] = useState(15);
   const showMoreItems = () => {
@@ -247,9 +248,13 @@ const ItemContent = () => {
                               </h6>
                             </div>
                           </div>
+                          {prices && prices.filter(nft => nft.name == item.title).map(filteredNFT => (
                           <button className="wishlist-button heart">
-                            <span className="number-like">{" Ξ25"}</span>
+
+                                <span className="number-like">{` Ξ${filteredNFT.stats.floor_price}`}</span>
+
                           </button>
+                          ))}
                         </div>
                         <div className="card-media">
                           <Link to="/item-details-01">
