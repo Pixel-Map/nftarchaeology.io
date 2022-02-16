@@ -34,8 +34,8 @@ const SliderStyle4 = () => {
                                 <div className="flat-bt-slider flex style2">
                                     <Link to="/explore" className="sc-button header-slider style style-1 rocket fl-button pri-1"><span>Explore
                                     </span></Link>
-                                    <Link to="/create-item" className="sc-button header-slider style style-1 note fl-button pri-1"><span>Add Archaeological Find
-                                    </span></Link>
+                                    <a href="https://github.com/Pixel-Map/historicalNFTs" className="sc-button header-slider style style-1 note fl-button pri-1"><span>Add Archaeological Find
+                                    </span></a>
                                 </div>
                             </div>
                             <Swiper

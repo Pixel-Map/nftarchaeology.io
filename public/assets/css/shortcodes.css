@@ -1778,7 +1778,7 @@
   font-size: 20px;
   line-height: 30px;
   color: #ebebeb;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
   margin-top: 29px;
   margin-bottom: 44px;
 }

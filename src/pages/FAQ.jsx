@@ -14,8 +14,8 @@ const FAQ = () => {
             },
             {
                 key: "1",
-                title: 'Customer support is available ?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.'
+                title: 'I have a question, who should I reach out to?',
+                text: 'For now, you can reach out to me directly on Twitter, @kenerwin88, or via Discord: kendog2012#3125.  Thank you!'
             },
 
         ]
@@ -50,7 +50,7 @@ const FAQ = () => {
                                 Frequently Asked Questions
                             </h2>
                             <h5 className="sub-title help-center mg-bt-32 ">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.
+                                Warning, the site is under HEAVY construction, so please give us some time :).
                             </h5>
                         </div>
                         <div className="col-md-12">

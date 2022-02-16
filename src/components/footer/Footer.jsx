@@ -60,29 +60,29 @@ const Footer = () => {
     const socialList = [
         {
             icon: "fab fa-twitter",
-            link: "#"
+            link: "https://twitter.com/PixelMapNFT"
         },
-        {
-            icon: "fab fa-facebook",
-            link: "#"
-        },
-        {
-            icon: "fab fa-telegram-plane",
-            link: "#"
-        },
-        {
-            icon: "fab fa-youtube",
-            link: "#"
-        },
-        {
-            icon: "icon-fl-tik-tok-2",
-            link: "#"
-        },
+        // {
+        //     icon: "fab fa-facebook",
+        //     link: "#"
+        // },
+        // {
+        //     icon: "fab fa-telegram-plane",
+        //     link: "#"
+        // },
+        // {
+        //     icon: "fab fa-youtube",
+        //     link: "#"
+        // },
+        // {
+        //     icon: "icon-fl-tik-tok-2",
+        //     link: "#"
+        // },
         {
             icon: "icon-fl-vt",
-            link: "#"
+            link: "https://discord.gg/pixelmap"
         },
-        
+
 
     ]
 
@@ -129,38 +129,38 @@ const Footer = () => {
                         </div>
                         <div className="col-lg-2 col-md-4 col-sm-5 col-5">
                             <div className="widget widget-menu style-1">
-                                <h5 className="title-widget">My Account</h5>
-                                <ul>
-                                    {
-                                        accountList.map((item,index) =>(
-                                            <li key={index}><Link to={item.link}>{item.title}</Link></li>
-                                        ))
-                                    }
-                                </ul>
+                                {/*<h5 className="title-widget">My Account</h5>*/}
+                                {/*<ul>*/}
+                                {/*    {*/}
+                                {/*        accountList.map((item,index) =>(*/}
+                                {/*            <li key={index}><Link to={item.link}>{item.title}</Link></li>*/}
+                                {/*        ))*/}
+                                {/*    }*/}
+                                {/*</ul>*/}
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-4 col-sm-7 col-7">
                             <div className="widget widget-menu style-2">
-                                <h5 className="title-widget">Resources</h5>
-                                <ul>
-                                    {
-                                        resourcesList.map((item,index) =>(
-                                            <li key={index}><Link to={item.link}>{item.title}</Link></li>
-                                        ))
-                                    }
-                                </ul>
+                                {/*<h5 className="title-widget">Resources</h5>*/}
+                                {/*<ul>*/}
+                                {/*    {*/}
+                                {/*        resourcesList.map((item,index) =>(*/}
+                                {/*            <li key={index}><Link to={item.link}>{item.title}</Link></li>*/}
+                                {/*        ))*/}
+                                {/*    }*/}
+                                {/*</ul>*/}
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-4 col-sm-5 col-5">
                             <div className="widget widget-menu fl-st-3">
-                                <h5 className="title-widget">Company</h5>
-                                <ul>
-                                    {
-                                        companyList.map((item,index) =>(
-                                            <li key={index}><Link to={item.link}>{item.title}</Link></li>
-                                        ))
-                                    }
-                                </ul>
+                                {/*<h5 className="title-widget">Company</h5>*/}
+                                {/*<ul>*/}
+                                {/*    {*/}
+                                {/*        companyList.map((item,index) =>(*/}
+                                {/*            <li key={index}><Link to={item.link}>{item.title}</Link></li>*/}
+                                {/*        ))*/}
+                                {/*    }*/}
+                                {/*</ul>*/}
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-6 col-sm-7 col-12">
@@ -171,7 +171,7 @@ const Footer = () => {
                                     <ul>
                                         {
                                             socialList.map((item,index) =>(
-                                                <li key={index}><Link to={item.link}><i className={item.icon}></i></Link></li>
+                                                <li key={index}><a href={item.link}><i className={item.icon}></i></a></li>
                                             ))
                                         }
                                     </ul>

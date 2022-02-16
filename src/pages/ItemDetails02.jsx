@@ -100,7 +100,9 @@ const ItemDetails02 = () => {
                             <div className="col-xl-6 col-md-12">
                                 <div className="content-left">
                                     <div className="media">
-                                        <img src={nftData.profileImage} alt="Axies"/>
+                                        {nftData.profileImage ?
+                                        <img src={nftData.profileImage} alt="Axies"/> : <img src={nftData.logo} alt="Axies"/>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -218,9 +220,14 @@ const ItemDetails02 = () => {
                                                     <ul className="bid-history-list">
                                                         <li>
                                                             <div className="content">
+                                                                {nftData.wrapperContract && nftData.wrapperContract.address ?
                                                                 <div className="client dunexyz">
-                                                                    <iframe src={`https://dune.xyz/embeds/115897/235053/6c9e742f-0494-4a70-9ea0-7148fc7311a8?contract_address=${nftData.wrapperContract.address.replace("0x", "x")}`}  height="500" width="600" title="chart 1"></iframe>
-                                                                </div>
+                                                                    <iframe
+                                                                        src={`https://dune.xyz/embeds/115897/235053/6c9e742f-0494-4a70-9ea0-7148fc7311a8?contract_address=${nftData.wrapperContract.address.replace("0x", "x")}`}
+                                                                        height="500" width="600"
+                                                                        title="chart 1"></iframe>
+                                                                </div> : <p>Non ERC-721 NFT, or no wrapper listed.</p>
+                                                                }
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -261,7 +268,9 @@ const ItemDetails02 = () => {
                         </div>
                     </div>
                 </div>
+                {nftData.relatedLinks &&
                 <LiveAuction data={nftData.relatedLinks}/>
+                }
                 <Footer/>
             </div>
         );
