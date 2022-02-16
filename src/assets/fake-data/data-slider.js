@@ -1,37 +1,17 @@
-import img1 from '../images/slider/slide_1.png';
-import img2 from '../images/slider/slide_1.png';
+import antiques from '../images/antiques.png';
 import imgbg1 from '../images/slider/bg_slide_1.png'
-import imgbg2 from '../images/slider/bg_slide_1.png'
 
 
 const heroSliderData = [
     {
-        title_1: "Discover, find,",
-        title_2: "Sell extraordinary",
-        title_3: "Monster NFTs",
-        description: "Marketplace for monster character cllections non fungible token NFTs",
-        img: img1,
+        title_1: "Rediscover, learn, collect",
+        title_2: "#HistorialNFTs",
+        // title_3: "Monster NFTs",
+        description: "These NFTs are connections to earlier periods of crypto history, often uniquely crafted, created before standards existed, and now sought by collectors seeking rare and authentic pieces on the Blockchain.",
+        img: antiques,
         imgbg: imgbg1,
         class:'left'
-    },
-    {
-        title_1: "Discover, find,",
-        title_2: "Sell extraordinary",
-        title_3: "Monster NFTs",
-        description: "Marketplace for monster character cllections non fungible token NFTs",
-        img: img2,
-        imgbg: imgbg2,
-        class:'center'
-    },
-    {
-        title_1: "Discover, find,",
-        title_2: "Sell extraordinary",
-        title_3: "Monster NFTs",
-        description: "Marketplace for monster character cllections non fungible token NFTs",
-        img: img2,
-        imgbg: imgbg2,
-        class:'right'
-    },
+    }
     
 ]
 

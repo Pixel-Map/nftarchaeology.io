@@ -16,7 +16,7 @@ const liveAuctionData = [
         img: img1,
         title: "Hamlet Contemplates Contemplates ",
         tags: "bsc",
-        imgAuthor: imga1,
+        imgAuthor: "pixelmapnft",
         nameAuthor: "SalvadorDali",
         price: "4.89 ETH",
         priceChange: "$12.246",

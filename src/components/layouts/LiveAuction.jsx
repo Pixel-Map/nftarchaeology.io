@@ -23,7 +23,7 @@ const LiveAuction = props => {
                         <div className="col-md-12">
                             <div className="heading-live-auctions">
                                 <h2 className="tf-title pb-20">
-                                    Live Auctions</h2>
+                                    Helpful Resources</h2>
                                 <Link to="/explore-03" className="exp style2">EXPLORE MORE</Link>
                             </div>
                         </div>
@@ -58,38 +58,11 @@ const LiveAuction = props => {
                                                             <div className="swiper-slide">
                                                                 <div className="slider-item">										
                                                                     <div className="sc-card-product">
-                                                                        <div className="card-media">
-                                                                            <Link to="/item-details-01"><img src={item.img} alt="axies" /></Link>
-                                                                            <Link to="/login" className="wishlist-button heart"><span className="number-like">{item.wishlist}</span></Link>
-                                                                            <div className="featured-countdown">
-                                                                                <span className="slogan"></span>
-                                                                                <Countdown date={Date.now() + 500000000}>
-                                                                                    <span>You are good to go!</span>
-                                                                                </Countdown>
-                                                                            </div>
-                                                                            <div className="button-place-bid">
-                                                                                <button onClick={() => setModalShow(true)} className="sc-button style-place-bid style bag fl-button pri-3"><span>Place Bid</span></button>
-                                                                            </div>
+                                                                        <div>
+
                                                                         </div>
-                                                                        <div className="card-title">
-                                                                            <h5><Link to="/item-details-01">"{item.title}"</Link></h5>
-                                                                            <div className="tags">{item.tags}</div>
-                                                                        </div>
-                                                                        <div className="meta-info">
-                                                                            <div className="author">
-                                                                                <div className="avatar">
-                                                                                    <img src={item.imgAuthor} alt="axies" />
-                                                                                </div>
-                                                                                <div className="info">
-                                                                                    <span>Creator</span>
-                                                                                    <h6> <Link to="/authors-02">{item.nameAuthor}
-                                                                                    </Link> </h6>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="price">
-                                                                                <span>Current Bid</span>
-                                                                                <h5> {item.price}</h5>
-                                                                            </div>
+                                                                            <h5><Link to="/item-details-01">{item.name}</Link></h5>
+                                                                        <div className="provenance"><p>{item.summary}</p>
                                                                         </div>
                                                                     </div>    	
                                                                 </div>

@@ -35,19 +35,7 @@ const Create = () => {
     return (
         <section className="tf-box-icon create style1 tf-section">
             <div className="themesflat-container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="heading-live-auctions mg-bt-22">
-                            <h2 className="tf-title pb-17">
-                                Create And Sell Your NFTs</h2>                         
-                        </div>
-                    </div>
-                    {
-                        data.map((item , index) => (
-                            <CreateItem key={index} item={item} />
-                        ))
-                    }
-                </div>                 
+
             </div>
         </section>
     );

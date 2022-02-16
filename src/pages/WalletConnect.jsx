@@ -31,11 +31,6 @@ const WalletConnect = () => {
                 description: 'Potenti eleifend faucibus quo vero nibh netus suspendisse unde? Consectetuer aspernatur'
             },
             {
-                img: img4,
-                title: 'Wallet Connect',
-                description: 'Metus corrupti itaque reiciendis, provident condimentum, reprehenderit numquam, mi'
-            },
-            {
                 img: img5,
                 title: 'Coinbase Wallet',
                 description: 'Sollicitudin iure conubia vivamus habitasse aptent, eligendi deserunt excepteur tellus non'

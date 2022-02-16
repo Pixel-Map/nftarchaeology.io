@@ -35,7 +35,7 @@ const TopSeller = () => {
                 id: 1,
                 dataTopSellerContent: [
                     {
-                        img: img1,
+                        img: "img1",
                         name: 'Windsor Lane',
                         mail: '@windsorlandhh',
                         top: '1',
@@ -124,7 +124,7 @@ const TopSeller = () => {
                 id: 2,
                 dataTopSellerContent: [
                     {
-                        img: img1,
+                        img: "https://pixelmap.io/assets/images/logo.png",
                         name: 'Windsor Lane',
                         mail: '@windsorlandhh',
                         top: '1',
@@ -186,7 +186,7 @@ const TopSeller = () => {
                 id: 3,
                 dataTopSellerContent: [
                     {
-                        img: img1,
+                        img: "https://pixelmap.io/assets/images/logo.png",
                         name: 'Windsor Lane',
                         mail: '@windsorlandhh',
                         top: '1',

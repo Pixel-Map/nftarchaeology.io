@@ -13,21 +13,7 @@ import discord from "../../../assets/images/logo/discord.jpeg";
 import twitter from "../../../assets/images/logo/twitter.png";
 import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
-
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-
-  async function fetchData() {
-    const response = await fetch(url);
-    const json = await response.json();
-    setData(json);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [url]);
-  return data;
-};
+import {useFetch} from "../../../lib/useFetch";
 
 const ItemContent = () => {
   const [dataTab] = useState([
@@ -64,10 +50,7 @@ const ItemContent = () => {
     },
   ]);
 
-  // Mine
-
   const nftData = useFetch("https://pixelmap.art/nfts/all.json");
-  // End mine
 
   const [visible, setVisible] = useState(15);
   const showMoreItems = () => {
@@ -270,7 +253,7 @@ const ItemContent = () => {
                         </div>
                         <div className="card-media">
                           <Link to="/item-details-01">
-                            <img src={item.logo} alt="Axies" />
+                            <img src={item.logo} alt="NFT Archaeology" />
                           </Link>
                           <div className="featured-countdown">
                             <span className="slogan"></span>
@@ -283,14 +266,13 @@ const ItemContent = () => {
                             </span>{" "}
                           </div>
                           <div className="button-place-bid">
+                            <Link to={`/nft-details/${item.title.toLowerCase()}`}>
                             <button
-                              onClick={() => setModalShow(true)}
-                              data-toggle="modal"
-                              data-target="#popup_bid"
                               className="sc-button style-place-bid style bag fl-button pri-3"
                             >
-                              <span>Place Bid</span>
+                              <span>View Details</span>
                             </button>
+                            </Link>
                           </div>
                         </div>
                         <div className="card-title">
