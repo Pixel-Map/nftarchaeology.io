@@ -120,11 +120,11 @@ const Footer = () => {
                                 <div className="logo-footer" id="logo-footer">
                                     <Link to="/">
                                         <img className='logo-dark' id="logo_footer" src={logodark} alt="nft-gaming" />
-                                        <img className='logo-light' id="logo_footer" src={logofooter} alt="nft-gaming" />
+                                        <img className='logo-light' id="logo_footer" src={logodark} alt="nft-gaming" />
                                         
                                     </Link>
                                 </div>
-                                <p className="sub-widget-logo">Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis non, fugit totam vel laboriosam vitae.</p>
+                                <p className="sub-widget-logo">Site maintained by the team behind PixelMap.io, with the help of various NFT archaeologists for curation.</p>
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-4 col-sm-5 col-5">
@@ -165,13 +165,8 @@ const Footer = () => {
                         </div>
                         <div className="col-lg-3 col-md-6 col-sm-7 col-12">
                             <div className="widget widget-subcribe">
-                                <h5 className="title-widget">Subscribe Us</h5>
-                                <div className="form-subcribe">
-                                    <form id="subscribe-form" action="#" method="GET" acceptCharset="utf-8" className="form-submit">
-                                        <input name="email"  className="email" type="email" placeholder="info@yourgmail.com" required />
-                                        <button id="submit" name="submit" type="submit"><i className="icon-fl-send"></i></button>
-                                    </form>
-                                </div>
+                                <h5 className="title-widget">Follow Us</h5>
+
                                 <div className="widget-social style-1 mg-t32">
                                     <ul>
                                         {

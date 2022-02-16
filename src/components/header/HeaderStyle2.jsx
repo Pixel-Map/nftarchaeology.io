@@ -81,21 +81,22 @@ const HeaderStyle2 = () => {
                                         {
                                             menus.map((data,index) => (
                                                 <li key={index} onClick={()=> handleOnClick(index)} className={`menu-item ${data.namesub ? 'menu-item-has-children' : '' } ${activeIndex === index ? 'active' : ''} ` }   >
-                                                    <Link to="#">{data.name}</Link>
+                                                    <Link to={data.links}>{data.name}</Link>
                                                     {
                                                         data.namesub &&
                                                         <ul className="sub-menu" >
-                                                        {
-                                                            data.namesub.map((submenu) => (
-                                                                <li key={submenu.id} className={
-                                                                    pathname === submenu.links
-                                                                      ? "menu-item current-item"
-                                                                      : "menu-item"
-                                                                  }><Link to={submenu.links}>{submenu.sub}</Link></li>
-                                                            ))
-                                                        }
-                                                    </ul>
+                                                            {
+                                                                data.namesub.map((submenu) => (
+                                                                    <li key={submenu.id} className={
+                                                                        pathname === submenu.links
+                                                                            ? "menu-item current-item"
+                                                                            : "menu-item"
+                                                                    }><Link to={submenu.links}>{submenu.sub}</Link></li>
+                                                                ))
+                                                            }
+                                                        </ul>
                                                     }
+
                                                 </li>
                                             ))
                                         }

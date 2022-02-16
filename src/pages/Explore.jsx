@@ -3,7 +3,7 @@ import Header from '../components/header/HeaderStyle2';
 import ItemContent from '../components/layouts/home-8/ItemContent';
 import SideBar from '../components/layouts/home-8/SideBar';
 
-const Home08 = () => {
+const Explore = () => {
     return (
         <div className='home-8'>
             <Header />
@@ -24,4 +24,4 @@ const Home08 = () => {
     );
 }
 
-export default Home08;
+export default Explore;

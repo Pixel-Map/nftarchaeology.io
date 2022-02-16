@@ -27,12 +27,12 @@ const SliderStyle4 = () => {
                             <div className="content">
                                 <h2 className="heading mt-15">Discover, learn, collect
                                 </h2>	
-                                <h1 className="heading mb-style"><span className="tf-text s1">#HistorialNFTs</span>
+                                <h1 className="heading mb-style"><span className="tf-text s1">#HistoricalNFTs</span>
                                 </h1>
                                 <p className="sub-heading mt-19 mb-40">These NFTs are connections to earlier periods of crypto history, often uniquely crafted, created before standards existed, and now sought by collectors seeking rare and authentic pieces on the Blockchain.
                                 </p>
                                 <div className="flat-bt-slider flex style2">
-                                    <Link to="/explore-01" className="sc-button header-slider style style-1 rocket fl-button pri-1"><span>Explore
+                                    <Link to="/explore" className="sc-button header-slider style style-1 rocket fl-button pri-1"><span>Explore
                                     </span></Link>
                                     <Link to="/create-item" className="sc-button header-slider style style-1 note fl-button pri-1"><span>Add Archaeological Find
                                     </span></Link>

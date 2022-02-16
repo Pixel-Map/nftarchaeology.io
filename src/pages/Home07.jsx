@@ -14,12 +14,12 @@ const Home07 = () => {
         <div className='home-7'>
             <HeaderStyle2 />
             <SliderStyle4 />
-            <LiveAuction />
-            <Category />
-            <TopSeller />
-            <TodayPicks />
-            <Create />
-            <PopularCollection />
+            {/*<LiveAuction />*/}
+            {/*<Category />*/}
+            {/*<TopSeller />*/}
+            {/*<TodayPicks />*/}
+            {/*<Create />*/}
+            {/*<PopularCollection />*/}
             <Footer />
         </div>
     );

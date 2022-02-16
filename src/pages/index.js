@@ -1,10 +1,6 @@
 
 import Home07 from "./Home07";
-import Home08 from "./Home08";
-import Explore01 from "./Explore01";
-import Explore02 from "./Explore02";
-import Explore03 from "./Explore03";
-import Explore04 from "./Explore04";
+import Explore from "./Explore";
 import LiveAuctions from "./LiveAuctions";
 import ItemDetails01 from "./ItemDetails01";
 import ItemDetails02 from "./ItemDetails02";
@@ -29,11 +25,7 @@ import Contact02 from "./Contact02";
 
 const routes = [
   { path: '/', component: <Home07 />},
-  { path: '/home-08', component: <Home08 />},
-  { path: '/explore-01', component: <Explore01 />},
-  { path: '/explore-02', component: <Explore02 />},
-  { path: '/explore-03', component: <Explore03 />},
-  { path: '/explore-04', component: <Explore04 />},
+  { path: '/explore', component: <Explore />},
   { path: '/live-auctions', component: <LiveAuctions />},
   { path: '/nft-details/:id', component: <ItemDetails02 />},
   { path: '/item-details-01', component: <ItemDetails01 />},
