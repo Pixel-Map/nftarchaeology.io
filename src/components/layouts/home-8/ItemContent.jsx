@@ -13,7 +13,7 @@ import discord from "../../../assets/images/logo/discord.jpeg";
 import twitter from "../../../assets/images/logo/twitter.png";
 import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
-import {useFetch} from "../../../lib/useFetch";
+import { useFetch } from "../../../lib/useFetch";
 
 const ItemContent = () => {
   const [dataTab] = useState([
@@ -248,16 +248,17 @@ const ItemContent = () => {
                               </h6>
                             </div>
                           </div>
-                          {prices && prices.filter(nft => nft.name == item.title).map(filteredNFT => (
-                          <button className="wishlist-button heart">
-
-                                <span className="number-like">{` Ξ${filteredNFT.stats.floor_price}`}</span>
-
-                          </button>
-                          ))}
+                          {prices &&
+                            prices
+                              .filter((nft) => nft.name == item.title)
+                              .map((filteredNFT) => (
+                                <button className="wishlist-button heart">
+                                  <span className="number-like">{` Ξ${filteredNFT.stats.floor_price}`}</span>
+                                </button>
+                              ))}
                         </div>
                         <div className="card-media">
-                          <Link to="/item-details-01">
+                          <Link to={`/nft-details/${item.title.toLowerCase()}`}>
                             <img src={item.logo} alt="NFT Archaeology" />
                           </Link>
                           <div className="featured-countdown">
@@ -271,12 +272,12 @@ const ItemContent = () => {
                             </span>{" "}
                           </div>
                           <div className="button-place-bid">
-                            <Link to={`/nft-details/${item.title.toLowerCase()}`}>
-                            <button
-                              className="sc-button style-place-bid style bag fl-button pri-3"
+                            <Link
+                              to={`/nft-details/${item.title.toLowerCase()}`}
                             >
-                              <span>View Details</span>
-                            </button>
+                              <button className="sc-button style-place-bid style bag fl-button pri-3">
+                                <span>View Details</span>
+                              </button>
                             </Link>
                           </div>
                         </div>
