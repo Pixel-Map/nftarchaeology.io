@@ -18,6 +18,7 @@ import etherscan from "../assets/images/logo/etherscan.jpg";
 import ethereum from '../assets/images/logo/ethereum.png'
 import {useFetch} from "../lib/useFetch";
 import {Timeline} from "react-twitter-widgets";
+import {Accordion} from "react-bootstrap-accordion";
 
 const ItemDetails02 = () => {
     const {id} = useParams();
@@ -106,6 +107,15 @@ const ItemDetails02 = () => {
                                         }
                                     </div>
                                 </div>
+                                <div className="pad-t-17"><h2>FAQ</h2>
+                                    {
+                                        nftData.faq && nftData.faq.map((item,index) => (
+                                          <Accordion key={index} title={item.question} >
+                                              <p>{item.answer}</p>
+                                          </Accordion>
+                                        ))
+                                    }
+                                </div>
                             </div>
                             <div className="col-xl-6 col-md-12">
                                 <div className="content-right">
@@ -134,9 +144,9 @@ const ItemDetails02 = () => {
                                             </div>
                                             <div className="meta-info">
                                                 <div className="author">
-                                                    <div className="avatar">
-                                                        <img src={img2016} alt="Axies"/>
-                                                    </div>
+                                                    {/*<div className="avatar">*/}
+                                                    {/*    <img src={img2016} alt="Axies"/>*/}
+                                                    {/*</div>*/}
                                                     <div className="info">
                                                         <span>Date Deployed</span>
                                                         <h6><Link to="/author-02">{new Date(nftData.creationTimestamp.replace(" +UTC", "")).toLocaleString()}</Link></h6>
@@ -267,12 +277,21 @@ const ItemDetails02 = () => {
                                                 </TabPanel>
                                             </Tabs>
                                         </div>
+
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
+
+
                 {nftData.relatedLinks &&
                 <LiveAuction data={nftData.relatedLinks}/>
                 }
