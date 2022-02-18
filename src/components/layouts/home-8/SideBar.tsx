@@ -63,6 +63,7 @@ const SideBar = () => {
       ],
     },
   ]);
+  // @ts-ignore
   return (
     <div id="side-bar" className="side-bar style-3 item">
       <div className="widget widget-filter style-1 mgbt-0">
@@ -70,7 +71,7 @@ const SideBar = () => {
           <h4 className="title-widget">Filter</h4>
         </div>
       </div>
-      <div className="divider"></div>
+      <div className="divider" />
       <div className="wrap-category">
         {dataCate.map((item, index) => (
           <div key={index} className="widget widget-category boder-bt">
@@ -81,8 +82,8 @@ const SideBar = () => {
                     <label>
                       <span>{itemm.field}</span>
                       <span className="pst-re">
-                        <input type="checkbox" defaultChecked={itemm.checked} />
-                        <span className="btn-checkbox"></span>
+                        <input type="checkbox" defaultChecked={Boolean(itemm.checked).valueOf()} />
+                        <span className="btn-checkbox" />
                       </span>
                     </label>
                     <br />

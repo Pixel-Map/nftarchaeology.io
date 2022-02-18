@@ -15,6 +15,7 @@ import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
 import { useFetch } from "../../../lib/useFetch";
 
+
 const ItemContent = () => {
   const [dataTab] = useState([
     {
@@ -51,7 +52,7 @@ const ItemContent = () => {
   ]);
 
   const nftData = useFetch("https://pixelmap.art/nfts/all.json");
-  const prices = useFetch("https://pixelmap.art/nfts/prices.json");
+  const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
 
   const [visible, setVisible] = useState(15);
   const showMoreItems = () => {
@@ -70,27 +71,41 @@ const ItemContent = () => {
   });
 
   const listToggle = () => {
-    listBtn.current.classList.add("active");
-    gridBtn.current.classList.remove("active");
-    listContent.current.classList.add("open");
-    gridContent.current.classList.remove("open");
+    // @ts-ignore
+    listBtn?.current?.classList.add("active");
+    // @ts-ignore
+    gridBtn?.current?.classList.remove("active");
+    // @ts-ignore
+    listContent?.current?.classList.add("open");
+    // @ts-ignore
+    gridContent?.current?.classList.remove("open");
   };
   const gridToggle = () => {
-    gridBtn.current.classList.add("active");
-    listBtn.current.classList.remove("active");
-    gridContent.current.classList.add("open");
-    listContent.current.classList.remove("open");
+    // @ts-ignore
+    gridBtn?.current?.classList.add("active");
+    // @ts-ignore
+    listBtn?.current?.classList.remove("active");
+    // @ts-ignore
+    gridContent?.current?.classList.add("open");
+    // @ts-ignore
+    listContent?.current?.classList.remove("open");
+
   };
 
   const [modalShow, setModalShow] = useState(false);
   if (!nftData) {
     return <div>Loading...</div>;
   } else {
+    // @ts-ignore
     const sortedNFTs = nftData.sort(
+// @ts-ignore
       (a, b) =>
+        // @ts-ignore
         new Date(a.creationTimestamp.replace(" +UTC", "")) -
+        // @ts-ignore
         new Date(b.creationTimestamp.replace(" +UTC", ""))
     );
+    // @ts-ignore
     return (
       <Fragment>
         <div className="flat-tabs items">
@@ -214,7 +229,7 @@ const ItemContent = () => {
                 </div>
 
                 <div className="content-item open" ref={listContent}>
-                  {sortedNFTs.map((item, key) => (
+                  {sortedNFTs.map((item: any, key: string | number | null | undefined) => (
                     <div key={key} className="col-item">
                       <div className="sc-card-product menu_card style-h7">
                         <div className="meta-info style">
@@ -250,8 +265,8 @@ const ItemContent = () => {
                           </div>
                           {prices &&
                             prices
-                              .filter((nft) => nft.name == item.title)
-                              .map((filteredNFT) => (
+                              .filter((nft: any) => nft.name == item.title)
+                              .map((filteredNFT: any) => (
                                 <button className="wishlist-button heart">
                                   <span className="number-like">{` Ξ${filteredNFT.stats.floor_price}`}</span>
                                 </button>

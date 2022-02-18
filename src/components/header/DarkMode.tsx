@@ -7,7 +7,7 @@ const DarkMode = () => {
     const body = document.body
     const lightTheme = "light"
     const darkTheme = "is_dark"
-    let theme
+    let theme: string | null = "is_dark" // Default to dark
 
     if (localStorage) {
         theme = localStorage.getItem("theme")
@@ -18,6 +18,7 @@ const DarkMode = () => {
         body.classList.add(darkTheme)
     }
 
+    // @ts-ignore
     const switchTheme = e => {
         if (theme === darkTheme) {
             body.classList.replace(darkTheme, lightTheme)

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export const useFetch = (url) => {
+export const useFetch = (url: RequestInfo) => {
     const [data, setData] = useState(null);
     useEffect(() => {
         async function fetchData() {
