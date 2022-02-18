@@ -1,18 +1,19 @@
 import './App.css';
-import {   Routes , Route } from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import routes from './pages/index'
-
+import React from 'react';
 
 function App() {
 
     return (
-        <Routes >
+        <Routes>
             {
-            routes.map((data,index) => (
-                <Route onUpdate={() => window.scrollTo(0, 0)} exact={true} path={data.path} element={data.component} key={index} />
-            ))
+                routes.map((data, index) => (
+                    <Route onUpdate={() => window.scrollTo(0, 0)} exact={true} path={data.path} element={data.component}
+                        key={index}/>
+                ))
             }
-      </Routes>
+        </Routes>
     );
 }
 
