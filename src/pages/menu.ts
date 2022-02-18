@@ -9,11 +9,11 @@ const menus = [
         name: 'Explore',
         links: '/explore',
     },
-    // {
-    //     id: 3,
-    //     name: 'Blog',
-    //     links: '/blog',
-    // },
+    {
+        id: 3,
+        name: 'Timeline',
+        links: '/timeline',
+    },
     {
         id: 4,
         name: 'FAQ',

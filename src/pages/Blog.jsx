@@ -4,6 +4,16 @@ import blogData from  '../assets/fake-data/data-blog'
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 
+interface Props {
+    item: {
+        img: string,
+        imgAuthor: string,
+        nameAuthor: string,
+        time: string,
+        title: string,
+        content: string
+    }
+}
 const Blog = () => {
     const [data] = useState(blogData);
 
@@ -15,7 +25,7 @@ const Blog = () => {
         <div>
             <Header />
             <section className="flat-title-page inner">
-                <div className="overlay"></div>
+                <div className="overlay" />
                 <div className="themesflat-container">
                     <div className="row">
                         <div className="col-md-12">
@@ -55,7 +65,7 @@ const Blog = () => {
     );
 }
 
-const BlogItem = props => (
+const BlogItem = (props: Props) => (
     <div className="fl-blog fl-item2 col-lg-4 col-md-6">
         <article className="sc-card-article">
             <div className="card-media">

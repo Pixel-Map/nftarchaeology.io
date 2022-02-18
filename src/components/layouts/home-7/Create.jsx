@@ -5,6 +5,11 @@ import icon2 from '../../../assets/images/icon/Category.png'
 import icon3 from '../../../assets/images/icon/Image2.png'
 import icon4 from '../../../assets/images/icon/Bookmark.png'
 
+interface Props {
+    item: {
+        colorbg:string
+    }
+}
 const Create = () => {
     const data = [
         {
@@ -61,7 +66,7 @@ const Create = () => {
     );
 }
 
-const CreateItem = props => (
+const CreateItem = (props: Props) => (
     <div className="sc-box-icon">
         <div className="image">
             <div className={`icon-create ${props.item.colorbg}`}>

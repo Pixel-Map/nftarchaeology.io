@@ -14,9 +14,27 @@ import twitter from "../../../assets/images/logo/twitter.png";
 import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
 import { useFetch } from "../../../lib/useFetch";
+import {getFilteredNFTs} from "../../../lib/getFilteredNFTs";
+import {sortNFTs} from "../../../lib/sortNFTs";
 
+interface Props {
+  contractStandardFilter: {
+    field: string,
+    checked: boolean
+  }[],
 
-const ItemContent = () => {
+  yearFilter: {
+    field: string,
+    checked: boolean
+  }[],
+
+  assetStorageTypeFilter: {
+    field: string,
+    checked: boolean
+  }[],
+}
+
+const ItemContent = (props: Props) => {
   const [dataTab] = useState([
     {
       id: 1,
@@ -97,14 +115,8 @@ const ItemContent = () => {
     return <div>Loading...</div>;
   } else {
     // @ts-ignore
-    const sortedNFTs = nftData.sort(
-// @ts-ignore
-      (a, b) =>
-        // @ts-ignore
-        new Date(a.creationTimestamp.replace(" +UTC", "")) -
-        // @ts-ignore
-        new Date(b.creationTimestamp.replace(" +UTC", ""))
-    );
+    const filteredNFTs = getFilteredNFTs(nftData, props.assetStorageTypeFilter, props.yearFilter, props.contractStandardFilter)
+    const sortedNFTs = sortNFTs(filteredNFTs)
     // @ts-ignore
     return (
       <Fragment>
@@ -267,7 +279,7 @@ const ItemContent = () => {
                             prices
                               .filter((nft: any) => nft.name == item.title)
                               .map((filteredNFT: any) => (
-                                <button className="wishlist-button heart">
+                                <button className="wishlist-button heart" key={item.title}>
                                   <span className="number-like">{` Ξ${filteredNFT.stats.floor_price}`}</span>
                                 </button>
                               ))}

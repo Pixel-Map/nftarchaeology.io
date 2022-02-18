@@ -43,7 +43,13 @@ LiveAuction.propTypes = {
     data: PropTypes.array.isRequired,
 }
 
-const LiveAuctionItem = props => (
+interface Props {
+    item: {
+        img: string
+    }
+}
+
+const LiveAuctionItem = (props: Props) => (
     <div className="fl-item col-xl-3 col-lg-6 col-md-6">
         <div className="sc-card-product">
             <div className="card-media">

@@ -8,7 +8,14 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
-const LiveAuction = props => {
+interface Props {
+    item: {
+        img: string,
+        name: string
+    }
+}
+
+const LiveAuction = (props: Props) => {
     const data = props.data;
 
     return (
@@ -63,7 +70,7 @@ LiveAuction.propTypes = {
     data: PropTypes.array.isRequired,
 }
 
-const TopSellerItem = props => (
+const TopSellerItem = (props: Props) => (
     <div className="swiper-container seller seller-slider">
         <div className="swiper-wrapper">
             <div className="swiper-slide">
@@ -71,7 +78,7 @@ const TopSellerItem = props => (
                     <div className="sc-author-box style-2">
                         <div className="author-avatar">
                                 <img src={props.item.img} alt="" className="avatar" />
-                            <div className="badge"></div>
+                            <div className="badge" />
                         </div>
                         <div className="author-infor">
                             <h5><Link to="/author-02">{props.item.name}</Link></h5>

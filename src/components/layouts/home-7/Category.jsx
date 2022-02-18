@@ -13,6 +13,12 @@ import img4 from '../../../assets/images/box-item/img_category4.jpg'
 import img5 from '../../../assets/images/box-item/img_category5.jpg'
 import img6 from '../../../assets/images/box-item/img_category6.jpg'
 
+interface Props {
+    item: {
+        img: string
+    }
+}
+
 const Category = () => {
     const [data] = useState([
         {
@@ -106,7 +112,7 @@ const Category = () => {
     </section>
     );
 }
-const CategoryItem = props => (
+const CategoryItem = (props: Props) => (
     <div className="swiper-container carousel11">
     <div className="swiper-wrapper">
         <div className="swiper-slide">

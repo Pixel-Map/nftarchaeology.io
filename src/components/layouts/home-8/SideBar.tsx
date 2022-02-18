@@ -1,68 +1,30 @@
-import React, { useState } from "react";
-import { Accordion } from "react-bootstrap-accordion";
+import React from 'react';
+import { Accordion } from 'react-bootstrap-accordion';
 
-const SideBar = () => {
-  const [dataCate] = useState([
-    {
-      title: "Year",
-      content: [
-        {
-          field: "2015",
-          checked: "checked",
-        },
-        {
-          field: "2016",
-          checked: "checked",
-        },
-        {
-          field: "2017",
-          checked: "checked",
-        },
-        {
-          field: "2018",
-          checked: "checked",
-        },
-        {
-          field: "2019",
-          checked: "checked",
-        },
-      ],
-    },
-    {
-      title: "Asset Storage Type",
-      content: [
-        {
-          field: "Onchain",
-          checked: "checked",
-        },
-        {
-          field: "IPFS",
-          checked: "checked",
-        },
-        {
-          field: "Webserver",
-          checked: "",
-        },
-      ],
-    },
-    {
-      title: "Contract Standard",
-      content: [
-        {
-          field: "Predates ERC-721",
-          checked: "checked",
-        },
-        {
-          field: "ERC-20",
-          checked: "checked",
-        },
-        {
-          field: "ERC-721",
-          checked: "checked",
-        },
-      ],
-    },
-  ]);
+interface Props {
+  contractStandardFilter: {
+      field: string,
+      checked: boolean
+    }[],
+  contractStandardHandler: (position: number) => void;
+
+  yearFilter: {
+    field: string,
+    checked: boolean
+  }[],
+  yearHandler: (position: number) => void;
+
+  assetStorageTypeFilter: {
+    field: string,
+    checked: boolean
+  }[],
+  assetStorageTypeFilterHandler: (position: number) => void;
+
+
+}
+
+const SideBar = (props: Props) => {
+
   // @ts-ignore
   return (
     <div id="side-bar" className="side-bar style-3 item">
@@ -73,26 +35,61 @@ const SideBar = () => {
       </div>
       <div className="divider" />
       <div className="wrap-category">
-        {dataCate.map((item, index) => (
-          <div key={index} className="widget widget-category boder-bt">
-            <Accordion title={item.title} show={true}>
-              <form action="#">
-                {item.content.map((itemm, index) => (
-                  <div key={index}>
-                    <label>
-                      <span>{itemm.field}</span>
-                      <span className="pst-re">
-                        <input type="checkbox" defaultChecked={Boolean(itemm.checked).valueOf()} />
-                        <span className="btn-checkbox" />
-                      </span>
-                    </label>
-                    <br />
-                  </div>
-                ))}
-              </form>
-            </Accordion>
-          </div>
-        ))}
+
+        <div className="widget widget-category boder-bt">
+          <Accordion title="Year" show={true}>
+            <form action="#">
+              {props.yearFilter.map((itemm, index) => (
+                <div key={index}>
+                  <label>
+                    <span>{itemm.field}</span>
+                    <span className="pst-re">
+                      <input type="checkbox" onChange={() => props.yearHandler(index)}   defaultChecked={true} />
+                      <span className="btn-checkbox" />
+                    </span>
+                  </label>
+                  <br />
+                </div>
+              ))}
+            </form>
+          </Accordion>
+        </div>
+        <div className="widget widget-category boder-bt">
+          <Accordion title="Asset Storage Type" show={true}>
+            <form action="#">
+              {props.assetStorageTypeFilter.map((itemm, index) => (
+                <div key={index}>
+                  <label>
+                    <span>{itemm.field}</span>
+                    <span className="pst-re">
+                      <input type="checkbox" onChange={() => props.assetStorageTypeFilterHandler(index)}  defaultChecked={true} />
+                      <span className="btn-checkbox" />
+                    </span>
+                  </label>
+                  <br />
+                </div>
+              ))}
+            </form>
+          </Accordion>
+        </div>
+        <div className="widget widget-category boder-bt">
+          <Accordion title="Contract Standard" show={true}>
+            <form action="#">
+              {props.contractStandardFilter.map((itemm, index) => (
+                <div key={index}>
+                  <label>
+                    <span>{itemm.field}</span>
+                    <span className="pst-re">
+                      <input type="checkbox" onChange={() => props.contractStandardHandler(index)} defaultChecked={itemm.checked} />
+                      <span className="btn-checkbox" />
+                    </span>
+                  </label>
+                  <br />
+                </div>
+              ))}
+            </form>
+          </Accordion>
+        </div>
       </div>
     </div>
   );

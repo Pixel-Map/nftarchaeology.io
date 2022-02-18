@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import imgsun from '../../assets/images/icon/sun.png'
 
 const DarkMode = () => {
-    let clickedClass = "clicked"
+    const clickedClass = "clicked"
     const body = document.body
     const lightTheme = "light"
     const darkTheme = "is_dark"
