@@ -53,6 +53,14 @@ const Explore = () => {
         {
             field: 'ERC-721',
             checked: true
+        },
+        {
+            field: 'Predates ERC-1155',
+            checked: true
+        },
+        {
+            field: "ERC-1155",
+            checked: true
         }
     ])
 
