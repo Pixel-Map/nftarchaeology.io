@@ -285,7 +285,7 @@ const ItemContent = (props: Props) => {
                               ))}
                         </div>
                         <div className="card-media">
-                          <Link to={`/nft-details/${item.title.toLowerCase()}`}>
+                          <Link to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}>
                             <img src={item.logo} alt="NFT Archaeology" />
                           </Link>
                           <div className="featured-countdown">
@@ -300,7 +300,7 @@ const ItemContent = (props: Props) => {
                           </div>
                           <div className="button-place-bid">
                             <Link
-                              to={`/nft-details/${item.title.toLowerCase()}`}
+                              to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}
                             >
                               <button className="sc-button style-place-bid style bag fl-button pri-3">
                                 <span>View Details</span>
