@@ -2,23 +2,20 @@ import React, {useState} from 'react';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import {Link, useParams} from 'react-router-dom'
-import Countdown from "react-countdown";
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import liveAuctionData from '../assets/fake-data/data-live-auction';
-import LiveAuction from '../components/layouts/LiveAuction';
 import img1 from '../assets/images/avatar/avt-3.jpg'
 import img2 from '../assets/images/avatar/avt-11.jpg'
 import img3 from '../assets/images/avatar/avt-1.jpg'
 import img4 from '../assets/images/avatar/avt-5.jpg'
 import img5 from '../assets/images/avatar/avt-7.jpg'
 import img6 from '../assets/images/avatar/avt-8.jpg'
-import img2016 from '../assets/images/logo/2016.png'
 import etherscan from "../assets/images/logo/etherscan.jpg";
 import ethereum from '../assets/images/logo/ethereum.png'
 import {useFetch} from "../lib/useFetch";
 import {Timeline} from "react-twitter-widgets";
 import {Accordion} from "react-bootstrap-accordion";
+import {FlagsComponent} from "../components/flagsComponent";
 
 const ItemDetails02 = () => {
     const {id} = useParams();
@@ -107,6 +104,7 @@ const ItemDetails02 = () => {
                                         }
                                     </div>
                                 </div>
+                                {nftData.faq && (
                                 <div className="pad-t-17 pad-b-54"><h2>FAQ</h2>
                                     {
                                         nftData.faq && nftData.faq.map((item,index) => (
@@ -116,6 +114,7 @@ const ItemDetails02 = () => {
                                         ))
                                     }
                                 </div>
+                                )}
                             </div>
                             <div className="col-xl-6 col-md-12">
                                 <div className="content-right">
@@ -181,9 +180,7 @@ const ItemDetails02 = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="item count-down color-47A432">
-                                                        <span>No red flags</span>
-                                                </div>
+                                                <FlagsComponent flags={nftData.flags} />
 
                                             </div>
                                         </div>
@@ -232,7 +229,7 @@ const ItemDetails02 = () => {
                                                     <ul className="bid-history-list">
                                                         <li>
                                                             <div className="content">
-                                                                {nftData.wrapperContract && nftData.wrapperContract.address ?
+                                                                {nftData?.wrapperContract && nftData.wrapperContract.address ?
                                                                 <div className="client dunexyz">
                                                                     <iframe
                                                                         src={`https://dune.xyz/embeds/115897/235053/6c9e742f-0494-4a70-9ea0-7148fc7311a8?contract_address=${nftData.wrapperContract.address.replace("0x", "x")}`}
@@ -260,7 +257,7 @@ const ItemDetails02 = () => {
                                                 <TabPanel>
                                                     <ul className="bid-history-list">
                                                         {
-                                                            nftData.relatedLinks.map((item, index) => (
+                                                            nftData.relatedLinks && nftData.relatedLinks.map((item, index) => (
                                                               <li key={index} item={item}>
                                                                   <div className="content">
                                                                       <div className="client">
