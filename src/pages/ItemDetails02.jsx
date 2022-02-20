@@ -107,7 +107,7 @@ const ItemDetails02 = () => {
                                         }
                                     </div>
                                 </div>
-                                <div className="pad-t-17"><h2>FAQ</h2>
+                                <div className="pad-t-17 pad-b-54"><h2>FAQ</h2>
                                     {
                                         nftData.faq && nftData.faq.map((item,index) => (
                                           <Accordion key={index} title={item.question} >
@@ -205,15 +205,15 @@ const ItemDetails02 = () => {
                                                                         <div className="client">
                                                                             <div className="sc-author-box style-2">
                                                                                 <div className="author-avatar">
-                                                                                    <Link to="#">
-                                                                                        <img src={etherscan} alt="Axies"
+                                                                                    <a href={`https://etherscan.io/address/${item.address}`}>
+                                                                                        <img src={etherscan} alt="Etherscan"
                                                                                              className="avatar"/>
-                                                                                    </Link>
+                                                                                    </a>
                                                                                 </div>
                                                                                 <div className="author-infor">
                                                                                     <div className="name">
-                                                                                        <h6><Link
-                                                                                            to="/author-02">{item.name} </Link>
+                                                                                        <h6><a
+                                                                                            href={`https://etherscan.io/address/${item.address}`}>{item.name} </a>
                                                                                         </h6> <span> {item.address}</span>
                                                                                     </div>
                                                                                     <span
