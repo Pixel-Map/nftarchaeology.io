@@ -194,6 +194,7 @@ const ItemDetails02 = () => {
                                                     <Tab>Contracts</Tab>
                                                     <Tab>Most Recent Sales</Tab>
                                                     <Tab>Tweets</Tab>
+                                                    <Tab>Related Links</Tab>
                                                 </TabList>
 
                                                 <TabPanel>
@@ -220,10 +221,6 @@ const ItemDetails02 = () => {
                                                                                         className="time">{item.notes}</span>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div className="price">
-                                                                            <h5>{item.price}</h5>
-                                                                            <span>= {item.priceChange}</span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
@@ -259,21 +256,29 @@ const ItemDetails02 = () => {
 
                                                         }}
                                                     />
-                                                    <div className="provenance">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry.
-                                                            Lorem Ipsum has been the industry's standard dummy text ever
-                                                            since the 1500s,
-                                                            when an unknown printer took a galley of type and scrambled
-                                                            it to make a type specimen book.
-                                                            It has survived not only five centuries, but also the leap
-                                                            into electronic typesetting,
-                                                            remaining essentially unchanged. It was popularised in the
-                                                            1960s with the release of Letraset sheets containing Lorem
-                                                            Ipsum passages,
-                                                            and more recently with desktop publishing software like
-                                                            Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                                    </div>
+                                                </TabPanel>
+                                                <TabPanel>
+                                                    <ul className="bid-history-list">
+                                                        {
+                                                            nftData.relatedLinks.map((item, index) => (
+                                                              <li key={index} item={item}>
+                                                                  <div className="content">
+                                                                      <div className="client">
+
+                                                                              <div className="author-infor">
+                                                                                  <div className="name">
+                                                                                      <a
+                                                                                        href={item.link}>{item.name} </a>
+                                                                                      <span> {item.address}</span>
+                                                                                  </div>
+
+                                                                              </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </li>
+                                                            ))
+                                                        }
+                                                    </ul>
                                                 </TabPanel>
                                             </Tabs>
                                         </div>
@@ -292,9 +297,7 @@ const ItemDetails02 = () => {
 
 
 
-                {nftData.relatedLinks &&
-                <LiveAuction data={nftData.relatedLinks}/>
-                }
+
                 <Footer/>
             </div>
         );
