@@ -252,7 +252,7 @@ const ItemContent = (props: Props) => {
                               </a>
                             </div>
                             <div className="avatar">
-                              <a href={item.twitter}>
+                              <a href={`https://twitter.com/${item.twitter}`}>
                                 <img src={twitter} alt="Twitter" />
                               </a>
                             </div>
