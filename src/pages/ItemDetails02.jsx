@@ -124,6 +124,7 @@ const ItemDetails02 = () => {
                                                 <h2>{nftData.title} Information</h2>
                                             </div>
                                             <div className="right">
+
                                                 <span className="viewed eye mg-r-8">225</span>
                                                 <span to="/login" className="liked heart wishlist-button"><span
                                                     className="number-like">100</span></span>

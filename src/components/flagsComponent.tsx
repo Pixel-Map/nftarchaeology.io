@@ -16,16 +16,15 @@ export function FlagsComponent(props: Props) {
   let message = "No red flags" // Default to no red flags
 
   if (props.flags.length != 0) {
+    flagColor = "color-D0C000FF" // At least one warning found
+    message = ` Warning`
     for (const flag of props.flags) {
-      flagColor = "color-D0C000FF"
-      if (props.flags.length > 1) {message = ` Warnings`}
-      else {message = ` Warning`}
       if (flag.level == "alert") {
-        if (props.flags.length > 1) {message = ` Alerts`}
-        else {message = ` Alert`}
         flagColor = "color-DF4949"
+        message = " Alert"
       }
     }
+    if (props.flags.length > 1) {message += 's'}
 
   }
   return <>
