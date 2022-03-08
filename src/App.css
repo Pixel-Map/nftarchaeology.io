@@ -18,7 +18,29 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+#discord-button .icon {
+  width: 25px;
+  height: 20px;
+  margin-right: -5px;
+}
+#discord-button svg {
+  fill: white;
+  height: 95%
+}
 
+#discord-button a {
+  color: white;
+  font: normal normal normal 12px/18px 'Helvetica Neue',Arial,sans-serif;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 9px;
+  background-color: #7289da;
+  text-decoration: none;
+}
+#discord-button a:hover {
+  background-color: #3e4d84;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
