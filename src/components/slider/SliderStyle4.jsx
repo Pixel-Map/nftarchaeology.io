@@ -74,8 +74,8 @@ const SliderStyle4 = () => {
                                 <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1477978145047339015/lRSBbcFW_400x400.jpg" width="230px" alt="Axies" /></SwiperSlide>
                                 <SwiperSlide><img src="https://pbs.twimg.com/media/FLljE9VXEAcFn5O?format=png&name=small" width="230px" alt="CryptoPunks" /></SwiperSlide>
                                 <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1038100267764473856/-5YZzEIE_400x400.jpg" width="230px" alt="Axies" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1482650504337448960/e5N8_-0W_400x400.jpg" width="230px" alt="CryptoSkulls" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1367892217533173768/TZD_RtU__400x400.jpg" alt="PixelCons" width="230px" /></SwiperSlide>
+                                <SwiperSlide><img src="https://pixelmap.art/nfts/images/logo-cryptoskulls.png" width="230px" alt="CryptoSkulls" /></SwiperSlide>
+                                <SwiperSlide><img src="https://pixelmap.art/nfts/images/logo-pixelcons.png" alt="PixelCons" width="230px" /></SwiperSlide>
 
                             </Swiper>
                             <Swiper
