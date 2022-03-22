@@ -110,7 +110,7 @@ const ItemDetails02 = () => {
                                 <div className="pad-t-17 pad-b-54"><h2>FAQ</h2>
                                     {
                                         nftData.faq && nftData.faq.map((item,index) => (
-                                          <Accordion key={index} title={item.question} >
+                                          <Accordion key={index} title={item.question} show={true} >
                                               <p>{item.answer}</p>
                                           </Accordion>
                                         ))
