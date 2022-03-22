@@ -6,9 +6,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import img1 from '../../assets/images/box-item/img_item1.png'
-import img2 from '../../assets/images/box-item/img_item2.png'
-import img3 from '../../assets/images/box-item/img_item3.png'
 import shape1 from '../../assets/images/backgroup-secsion/bg-gradient1.png'
 import shape2 from '../../assets/images/backgroup-secsion/bg-gradient2.png'
 import shape3 from '../../assets/images/backgroup-secsion/bg-gradient3.png'
@@ -21,7 +18,7 @@ const SliderStyle4 = () => {
                 <img className="bgr-gradient gradient1" src={shape1} alt="Axies" />
                 <img className="bgr-gradient gradient2" src={shape2} alt="Axies" />
                 <img className="bgr-gradient gradient3" src={shape3} alt="Axies" />
-                <div className="overlay"></div>
+                <div className="overlay" />
                 <div className="themesflat-container ">
                         <div className="wrap-heading flat-slider flex">
                             <div className="content">

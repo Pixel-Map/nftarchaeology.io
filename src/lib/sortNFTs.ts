@@ -1,4 +1,4 @@
-export const sortNFTs = (nfts: any[]) => {
+export const sortNFTs = (nfts: unknown[]) => {
   return nfts.sort(
 // @ts-ignore
     (a, b) =>

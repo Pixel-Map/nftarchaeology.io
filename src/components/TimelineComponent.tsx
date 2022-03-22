@@ -22,12 +22,6 @@ import {
   Badge,
   Card,
   CardBody,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Row,
-  Col,
 } from "reactstrap";
 import { NFT } from "../interfaces/nft.interface";
 import {useFetch} from "../lib/useFetch";

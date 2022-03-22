@@ -17,8 +17,8 @@ const Header = () => {
             window.removeEventListener('scroll', isSticky);
         };
     });
-    // @ts-ignore
-    const isSticky = (e) => {
+
+    const isSticky = () => {
         const header = document.querySelector('.js-header');
         const scrollTop = window.scrollY;
         scrollTop >= 300 ? header?.classList.add('is-fixed') : header?.classList.remove('is-fixed');
@@ -62,7 +62,7 @@ const Header = () => {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
+                                <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span /></div>
                                 <nav id="main-nav" className="main-nav" ref={menuLeft} >
                                     <ul id="menu-primary-menu" className="menu">
                                         {
@@ -95,13 +95,13 @@ const Header = () => {
                                 <div className="flat-search-btn flex">
                                     <div className="header-search flat-show-search" id="s1">
                                         <Link to="#" className="show-search header-search-trigger" onClick={searchBtn}>
-                                            <i className="far fa-search"></i>
+                                            <i className="far fa-search" />
                                         </Link>
                                         <div className="top-search" ref={btnSearch}>
                                             <form action="#" method="get" role="search" className="search-form">
                                                 <input type="search" id="s" className="search-field" placeholder="Search..." name="s" title="Search for" />
                                                 <button className="search search-submit" type="submit" title="Search">
-                                                    <i className="icon-fl-search-filled"></i>
+                                                    <i className="icon-fl-search-filled" />
                                                 </button>
                                             </form>
                                         </div>
@@ -121,7 +121,7 @@ const Header = () => {
                                                 <div className="d-flex align-items-center copy-text justify-content-between">
                                                     <span> 13b9ebda035r178... </span>
                                                     <Link to="/" className="ml-2">
-                                                        <i className="fal fa-copy"></i>
+                                                        <i className="fal fa-copy" />
                                                     </Link>
                                                 </div>
                                                 <div className="d-flex align-items-center mt-10">
@@ -135,17 +135,11 @@ const Header = () => {
                                                         <p className="w-full text-sm font-bold text-green-500">16.58 ETH</p>
                                                     </div>
                                                 </div>
-                                                <div className="hr"></div>
+                                                <div className="hr" />
                                                 <div className="links mt-20">
                                                     <Link to="#">
-                                                        <i className="fab fa-accusoft"></i> <span> My items</span>
+                                                        <i className="fab fa-accusoft" /> <span> My items</span>
                                                     </Link>
-                                                    <a className="mt-10" href="/edit-profile">
-                                                        <i className="fas fa-pencil-alt"></i> <span> Edit Profile</span>
-                                                    </a>
-                                                    <a className="mt-10" href="/login" id="logout">
-                                                        <i className="fal fa-sign-out"></i> <span> Logout</span>
-                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

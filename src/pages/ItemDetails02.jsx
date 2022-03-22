@@ -1,15 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import {Link, useParams} from 'react-router-dom'
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import img1 from '../assets/images/avatar/avt-3.jpg'
-import img2 from '../assets/images/avatar/avt-11.jpg'
-import img3 from '../assets/images/avatar/avt-1.jpg'
-import img4 from '../assets/images/avatar/avt-5.jpg'
-import img5 from '../assets/images/avatar/avt-7.jpg'
-import img6 from '../assets/images/avatar/avt-8.jpg'
 import etherscan from "../assets/images/logo/etherscan.jpg";
 import ethereum from '../assets/images/logo/ethereum.png'
 import {useFetch} from "../lib/useFetch";
@@ -22,53 +16,7 @@ const ItemDetails02 = () => {
     const {id} = useParams();
     const nftData = useFetch(`https://pixelmap.art/nfts/${id}.json`);
     const priceData = useFetch(`https://pixelmap.art/nfts/prices.json`);
-    console.log(nftData)
-    const [dataHistory] = useState(
-        [
-            {
-                img: img1,
-                name: "Mason Woodward",
-                time: "8 hours ago",
-                price: "4.89 ETH",
-                priceChange: "$12.246"
-            },
-            {
-                img: img2,
-                name: "Mason Woodward",
-                time: "at 06/10/2021, 3:20 AM",
-                price: "4.89 ETH",
-                priceChange: "$12.246"
-            },
-            {
-                img: img3,
-                name: "Mason Woodward",
-                time: "8 hours ago",
-                price: "4.89 ETH",
-                priceChange: "$12.246"
-            },
-            {
-                img: img4,
-                name: "Mason Woodward",
-                time: "8 hours ago",
-                price: "4.89 ETH",
-                priceChange: "$12.246"
-            },
-            {
-                img: img5,
-                name: "Mason Woodward",
-                time: "8 hours ago",
-                price: "4.89 ETH",
-                priceChange: "$12.246"
-            },
-            {
-                img: img6,
-                name: "Mason Woodward",
-                time: "8 hours ago",
-                price: "4.89 ETH",
-                priceChange: "$12.246"
-            },
-        ]
-    )
+
     if (!nftData) {
         return <div>Loading...</div>;
     } else {
@@ -76,7 +24,7 @@ const ItemDetails02 = () => {
             <div className='item-details'>
                 <Header/>
                 <section className="flat-title-page inner">
-                    <div className="overlay"></div>
+                    <div className="overlay" />
                     <div className="themesflat-container">
                         <div className="row">
                             <div className="col-md-12">
@@ -192,7 +140,7 @@ const ItemDetails02 = () => {
                                                     <span className="heading">Current Floor</span>
                                                     <div className="price">
                                                         <div className="price-box">
-                                                            {priceData && priceData.filter(nft => nft.name == nftData.title).map(filteredNFT => (
+                                                            {priceData && priceData.filter(nft => nft.name === nftData.title).map(filteredNFT => (
                                                                 <>
                                                             <h5> {filteredNFT.stats.floor_price} ETH</h5>
                                                             <span> (${Number(filteredNFT.stats.floor_price * 3136.89).toLocaleString()})</span>
@@ -255,7 +203,7 @@ const ItemDetails02 = () => {
                                                                     <iframe
                                                                         src={`https://dune.xyz/embeds/115897/235053/6c9e742f-0494-4a70-9ea0-7148fc7311a8?contract_address=${nftData.wrapperContract.address.replace("0x", "x")}`}
                                                                         height="500" width="600"
-                                                                        title="chart 1"></iframe>
+                                                                        title="chart 1" />
                                                                 </div> : <p>Non ERC-721 NFT, or no wrapper listed.</p>
                                                                 }
                                                             </div>

@@ -6,7 +6,6 @@ import Footer from '../components/footer/Footer';
 import img1 from '../assets/images/icon/connect-1.png'
 import img2 from '../assets/images/icon/connect-2.png'
 import img3 from '../assets/images/icon/connect-3.png'
-import img4 from '../assets/images/icon/connect-4.png'
 import img5 from '../assets/images/icon/connect-5.png'
 import img6 from '../assets/images/icon/connect-6.png'
 import img7 from '../assets/images/icon/connect-7.png'
@@ -57,7 +56,7 @@ const WalletConnect = () => {
         <div>
             <Header />
             <section className="flat-title-page inner">
-                <div className="overlay"></div>
+                <div className="overlay" />
                 <div className="themesflat-container">
                     <div className="row">
                         <div className="col-md-12">

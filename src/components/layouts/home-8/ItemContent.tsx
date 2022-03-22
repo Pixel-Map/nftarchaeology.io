@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment, useRef } from "react";
+import React, { useState, Fragment, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Countdown from "react-countdown";
@@ -214,19 +214,19 @@ const ItemContent = (props: Props) => {
                             stroke="white"
                             strokeWidth="1.5"
                             strokeLinecap="round"
-                          ></path>
+                          />
                           <path
                             d="M6 12H18"
                             stroke="white"
                             strokeWidth="1.5"
                             strokeLinecap="round"
-                          ></path>
+                          />
                           <path
                             d="M10 17H14"
                             stroke="white"
                             strokeWidth="1.5"
                             strokeLinecap="round"
-                          ></path>
+                          />
                         </svg>
                         <span>Oldest To Newest</span>
                       </Dropdown.Toggle>
@@ -289,7 +289,7 @@ const ItemContent = (props: Props) => {
                             <img src={item.logo} alt="NFT Archaeology" />
                           </Link>
                           <div className="featured-countdown">
-                            <span className="slogan"></span>
+                            <span className="slogan" />
                             <span>
                               {longEnUSFormatter.format(
                                 new Date(
@@ -372,7 +372,7 @@ const ItemContent = (props: Props) => {
                         <div className="countdown">
                           <p>Countdown</p>
                           <div className="featured-countdown">
-                            <span className="slogan"></span>
+                            <span className="slogan" />
                             <Countdown date={Date.now() + 500000000}>
                               <span>You are good to go!</span>
                             </Countdown>

@@ -17,7 +17,7 @@ const HeaderStyle2 = () => {
             window.removeEventListener('scroll', isSticky);
         };
     });
-    const isSticky = (e: any) => {
+    const isSticky = () => {
         const header = document.querySelector('.js-header');
         const scrollTop = window.scrollY;
         scrollTop >= 300 ? header?.classList.add('is-fixed') : header?.classList.remove('is-fixed');
@@ -55,7 +55,7 @@ const HeaderStyle2 = () => {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span></span></div>
+                                <div className="mobile-button" ref={btnToggle} onClick={menuToggle}><span /></div>
                                 <div className="question-form">
                                     <form action="#" method="get">
                                         <input type="text" placeholder="Type to search..." required />
@@ -124,7 +124,7 @@ const HeaderStyle2 = () => {
                                                 <div className="d-flex align-items-center copy-text justify-content-between">
                                                     <span> 13b9ebda035r178... </span>
                                                     <Link to="/" className="ml-2">
-                                                        <i className="fal fa-copy"></i>
+                                                        <i className="fal fa-copy" />
                                                     </Link>
                                                 </div>
                                                 <div className="d-flex align-items-center mt-10">
@@ -138,17 +138,11 @@ const HeaderStyle2 = () => {
                                                         <p className="w-full text-sm font-bold text-green-500">16.58 ETH</p>
                                                     </div>
                                                 </div>
-                                                <div className="hr"></div>
+                                                <div className="hr" />
                                                 <div className="links mt-20">
                                                     <Link to="#">
-                                                        <i className="fab fa-accusoft"></i> <span> My items</span>
+                                                        <i className="fab fa-accusoft" /> <span> My items</span>
                                                     </Link>
-                                                    <a className="mt-10" href="/edit-profile">
-                                                        <i className="fas fa-pencil-alt"></i> <span> Edit Profile</span>
-                                                    </a>
-                                                    <a className="mt-10" href="/login" id="logout">
-                                                        <i className="fal fa-sign-out"></i> <span> Logout</span>
-                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
