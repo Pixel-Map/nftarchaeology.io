@@ -143,6 +143,20 @@ const ItemDetails02 = () => {
                                             </div>
                                         </div>
 
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div className="col-xl-6 col-md-12">
+                                <div className="content-right">
+                                    <div className="sc-item-details">
+                                        <div className="meta-title-item">
+                                            <div className="left">
+                                                <h2>Related Information</h2><br/>
+                                            </div>
+                                        </div>
+
                                         <div className="flat-tabs themesflat-tabs">
                                             <Tabs>
                                                 <TabList>
@@ -188,12 +202,12 @@ const ItemDetails02 = () => {
                                                         <li>
                                                             <div className="content">
                                                                 {nftData?.wrapperContract && nftData.wrapperContract.address ?
-                                                                <div className="client dunexyz">
-                                                                    <iframe
-                                                                        src={`https://dune.xyz/embeds/115897/235053/6c9e742f-0494-4a70-9ea0-7148fc7311a8?contract_address=${nftData.wrapperContract.address.replace("0x", "x")}`}
-                                                                        height="500" width="600"
-                                                                        title="chart 1" />
-                                                                </div> : <p>Non ERC-721 NFT, or no wrapper listed.</p>
+                                                                    <div className="client dunexyz">
+                                                                        <iframe
+                                                                            src={`https://dune.xyz/embeds/115897/235053/6c9e742f-0494-4a70-9ea0-7148fc7311a8?contract_address=${nftData.wrapperContract.address.replace("0x", "x")}`}
+                                                                            height="500" width="600"
+                                                                            title="chart 1" />
+                                                                    </div> : <p>Non ERC-721 NFT, or no wrapper listed.</p>
                                                                 }
                                                             </div>
                                                         </li>
@@ -216,21 +230,21 @@ const ItemDetails02 = () => {
                                                     <ul className="bid-history-list">
                                                         {
                                                             nftData.relatedLinks && nftData.relatedLinks.map((item, index) => (
-                                                              <li key={index} item={item}>
-                                                                  <div className="content">
-                                                                      <div className="client">
+                                                                <li key={index} item={item}>
+                                                                    <div className="content">
+                                                                        <div className="client">
 
-                                                                              <div className="author-infor">
-                                                                                  <div className="name">
-                                                                                      <a
+                                                                            <div className="author-infor">
+                                                                                <div className="name">
+                                                                                    <a
                                                                                         href={item.link}>{item.name} </a>
-                                                                                      <span> {item.address}</span>
-                                                                                  </div>
+                                                                                    <span> {item.address}</span>
+                                                                                </div>
 
-                                                                              </div>
-                                                                      </div>
-                                                                  </div>
-                                                              </li>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
                                                             ))
                                                         }
                                                     </ul>
@@ -243,15 +257,21 @@ const ItemDetails02 = () => {
                                 </div>
 
                             </div>
+
+                        </div>
+                        <div className="row">
                             <div className="col-xl-6 col-md-12">
                                 {nftData.analysis &&
-                                <div className="content-left">
+                                <div className="content-right">
                                     <div className="pad-t-17 clearme">
                                         <ReactMarkdown>{nftData.analysis}</ReactMarkdown>
 
                                     </div>
                                 </div>
                                 }
+                            </div>
+                            <div className="col-xl-6 col-md-12">
+                        <div className="content-right">
                                 {nftData.faq && (
                                     <div className="pad-t-17 pad-b-54"><h2>FAQ</h2>
                                         {
@@ -265,6 +285,8 @@ const ItemDetails02 = () => {
                                     </div>
                                 )}
                             </div>
+
+                        </div>
                         </div>
 
                     </div>
