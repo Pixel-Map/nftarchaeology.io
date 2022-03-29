@@ -11,6 +11,7 @@ import {Timeline} from "react-twitter-widgets";
 import {Accordion} from "react-bootstrap-accordion";
 import {FlagsComponent} from "../components/flagsComponent";
 import {TwitterFollowButton} from "react-twitter-embed";
+import ReactMarkdown from 'react-markdown'
 
 const ItemDetails02 = () => {
     const {id} = useParams();
@@ -28,8 +29,16 @@ const ItemDetails02 = () => {
                     <div className="themesflat-container">
                         <div className="row">
                             <div className="col-md-12">
+
                                 <div className="page-title-heading mg-bt-12">
-                                    <h1 className="heading text-center">{nftData.title}</h1>
+                                    <div className="meta-title-item">
+                                        <div className="left">
+                                            <h1 className="heading text-center kheader">
+                                                <span>{nftData.logo && <img src={nftData.logo} alt="logo" width="48px" />}</span>
+                                                {nftData.title}</h1><br/>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div className="breadcrumbs style2">
                                     <ul>
@@ -45,36 +54,16 @@ const ItemDetails02 = () => {
                 <div className="tf-section tf-item-details style-2">
                     <div className="themesflat-container">
                         <div className="row">
-                            <div className="col-xl-6 col-md-12">
-                                <div className="content-left">
-                                    <div className="media">
-                                        {nftData.profileImage ?
-                                        <img src={nftData.profileImage} alt="Axies"/> : <img src={nftData.logo} alt="Axies"/>
-                                        }
-                                    </div>
-                                </div>
 
-                                {nftData.faq && (
-                                <div className="pad-t-17 pad-b-54"><h2>FAQ</h2>
-                                    {
-                                        nftData.faq && nftData.faq.map((item,index) => (
-                                          <Accordion key={index} title={item.question} show={true} >
-                                              <p>{item.answer}</p>
-                                          </Accordion>
-                                        ))
-                                    }
-
-                                </div>
-                                )}
-                            </div>
                             <div className="col-xl-6 col-md-12">
                                 <div className="content-right">
                                     <div className="sc-item-details">
-                                        <div className="meta-item">
+                                        <div className="meta-title-item">
                                             <div className="left">
-                                                <h2>{nftData.title} Information</h2>
+                                                <h2>Overview</h2><br/>
                                             </div>
                                         </div>
+                                        <h5 className="sub-title ">{nftData.excerpt}</h5><br/>
                                         <div className="client-infor sc-card-product">
 
                                             <div className="meta-info">
@@ -119,7 +108,7 @@ const ItemDetails02 = () => {
                                         </div>
                                         <br/>
 
-                                        <p>{nftData.excerpt}</p>
+
 
                                         <div className="meta-item-details">
                                             <div className="item-style-2 item-details">
@@ -254,7 +243,28 @@ const ItemDetails02 = () => {
                                 </div>
 
                             </div>
+                            <div className="col-xl-6 col-md-12">
+                                {nftData.analysis &&
+                                <div className="content-left">
+                                    <div className="pad-t-17 clearme">
+                                        <ReactMarkdown>{nftData.analysis}</ReactMarkdown>
 
+                                    </div>
+                                </div>
+                                }
+                                {nftData.faq && (
+                                    <div className="pad-t-17 pad-b-54"><h2>FAQ</h2>
+                                        {
+                                            nftData.faq && nftData.faq.map((item,index) => (
+                                                <Accordion key={index} title={item.question} show={true} >
+                                                    <p>{item.answer}</p>
+                                                </Accordion>
+                                            ))
+                                        }
+
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                     </div>

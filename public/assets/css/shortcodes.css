@@ -189,7 +189,7 @@
   max-width: 100%;
 }
 
-/* button 
+/* button
 --------------------------------------------------*/
 .sc-button {
   display: inline-block;
@@ -583,7 +583,7 @@
   transform: rotateY(360deg);
 }
 
-/* sc card article 
+/* sc card article
 --------------------------------------------------*/
 .sc-card-article {
   background: var(--primary-color);
@@ -3478,7 +3478,7 @@ section.today-picks {
   padding-bottom: 14px;
 }
 
-/* Top Seller Authours 
+/* Top Seller Authours
 ------------------------------------------------------------ */
 .seller {
   margin-left: -3px !important;
@@ -4048,7 +4048,7 @@ section.today-picks {
 }
 
 .author-infor .time {
-  font-size: 13px;
+  font-size: 16px;
   line-height: 20px;
   color: var(--primary-color4);
 }
@@ -4114,11 +4114,25 @@ section.today-picks {
   border: unset;
 }
 .tf-item-details .content-right .themesflat-tabs .react-tabs__tab-panel {
-  height: 210px;
+  height: 100%;
   overflow: hidden;
   overflow-y: auto;
   padding-top: 1px;
   padding-right: 60px;
+}
+
+.clearme p {
+  margin: 1em 0px;
+}
+.clearme ul li {
+  list-style-type: disc;
+  font-size: 16px; font-weight: normal; line-height: normal;
+
+}
+
+.clearme ul {
+  padding: 20px
+
 }
 
 .tf-item-details
@@ -4349,6 +4363,14 @@ section.today-picks {
   padding: 9px 15px;
   border-radius: 40px;
   background-color: var(--primary-color5);
+}
+
+.kheader span img {
+  padding: 0px 0px 0px 0px;
+  margin-bottom: 7px;
+  margin-right: 8px;
+  border-radius: 100px;
+
 }
 
 .tf-item-details .content-right .meta-item .wishlist-button {
@@ -5699,7 +5721,7 @@ button.accordion-button {
 .live-auctions.style3.home4 .sc-card-product {
   margin-bottom: 30px;
 }
-/* 
+/*
 .dropdown-menu.show {
     display: block;
     -webkit-transform: translateY(0);
