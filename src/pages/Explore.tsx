@@ -7,6 +7,10 @@ import SideBar from '../components/layouts/home-8/SideBar';
 const Explore = () => {
     const [yearFilter, setYearFilter] = useState([
         {
+            field: '1994',
+            checked: true
+        },
+        {
             field: '2015',
             checked: true
         },
