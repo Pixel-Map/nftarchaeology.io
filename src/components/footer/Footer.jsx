@@ -1,62 +1,7 @@
 import React, { useState ,useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import logodark from '../../assets/images/logo/logo_dark.png'
-import logofooter from '../../assets/images/logo/logo2.png'
 const Footer = () => {
-    const accountList = [
-        {
-            title: "Authors",
-            link: "/authors-01"
-        },
-        {
-            title: "Collection",
-            link: "/wallet-connect"
-        },
-        {
-            title: "Author Profile",
-            link: "/edit-profile"
-        },
-        {
-            title: "Create Item",
-            link: "/create-item"
-        },
-    ]
-    const resourcesList = [
-        {
-            title: "Help & Support",
-            link: "/help-center"
-        },
-        {
-            title: "Live Auctions",
-            link: "/live-auctions"
-        },
-        {
-            title: "Item Details",
-            link: "/item-details-01"
-        },
-        {
-            title: "Activity",
-            link: "/activity-01"
-        },
-    ]
-    const companyList = [
-        {
-            title: "Explore",
-            link: "/explore-01"
-        },
-        {
-            title: "Contact Us",
-            link: "/contact-01"
-        },
-        {
-            title: "Our Blog",
-            link: "/blog"
-        },
-        {
-            title: "FAQ",
-            link: "/faq"
-        },
-    ]
     const socialList = [
         {
             icon: "fab fa-twitter",
@@ -171,7 +116,7 @@ const Footer = () => {
                                     <ul>
                                         {
                                             socialList.map((item,index) =>(
-                                                <li key={index}><a href={item.link}><i className={item.icon}></i></a></li>
+                                                <li key={index}><a href={item.link}><i className={item.icon} /></a></li>
                                             ))
                                         }
                                     </ul>
@@ -183,7 +128,7 @@ const Footer = () => {
             </footer>
             {
                 isVisible && 
-                <Link onClick={scrollToTop}  to='#' id="scroll-top"></Link>
+                <Link onClick={scrollToTop}  to='#' id="scroll-top" />
             }
             
             <div className="modal fade popup" id="popup_bid" tabIndex="-1" role="dialog" aria-hidden="true">
@@ -201,7 +146,7 @@ const Footer = () => {
                             <p>Enter quantity. <span className="color-popup">5 available</span>
                             </p>
                             <input type="number" className="form-control" placeholder="1" />
-                            <div className="hr"></div>
+                            <div className="hr" />
                             <div className="d-flex justify-content-between">
                                 <p> You must bid at least:</p>
                                 <p className="text-right price color-popup"> 4.89 ETH </p>

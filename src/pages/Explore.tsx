@@ -29,7 +29,15 @@ const Explore = () => {
         {
             field: '2019',
             checked: true
-        }
+        },
+        {
+            field: '2020',
+            checked: true
+        },
+        {
+            field: '2021',
+            checked: true
+        },
     ])
     const [assetStorageTypeFilter, setAssetStorageTypeFilter] = useState([
         {
