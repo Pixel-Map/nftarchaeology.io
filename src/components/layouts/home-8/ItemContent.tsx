@@ -310,7 +310,7 @@ const ItemContent = (props: Props) => {
                         </div>
                         <div className="card-title">
                           <h5>
-                            <Link to="item-details.html">{item.title}</Link>
+                            <Link to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}>{item.title}</Link>
                           </h5>
                         </div>
                         <div className="meta-info">
