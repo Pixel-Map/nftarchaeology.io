@@ -67,7 +67,7 @@ const TimelineComponent = () => {
                         </p>
                       </div>
                       <Link
-                        to={`/nft-details/${item.title.toLowerCase()}`}
+                        to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}
                       >
                       <h6>
                         <i className="ti-time"/>
