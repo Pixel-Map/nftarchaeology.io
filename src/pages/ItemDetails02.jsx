@@ -15,7 +15,7 @@ import ReactMarkdown from 'react-markdown'
 
 const ItemDetails02 = () => {
     const {id} = useParams();
-    const nftData = useFetch(`https://pixelmap.art/nfts/${id}.json`);
+    const nftData = useFetch(`https://api.nftarchaeology.io/nfts/${id}`);
     const priceData = useFetch(`https://pixelmap.art/nfts/prices.json`);
 
     if (!nftData) {
@@ -34,7 +34,7 @@ const ItemDetails02 = () => {
                                     <div className="meta-title-item">
                                         <div className="left">
                                             <h1 className="heading text-center kheader">
-                                                <span>{nftData.logo && <img src={nftData.logo} alt="logo" width="48px" />}</span>
+                                                <span>{nftData.logo && <img src={"https://api.nftarchaeology.io/" + nftData.logo} alt="logo" width="48px" />}</span>
                                                 {nftData.title}</h1><br/>
                                         </div>
                                     </div>

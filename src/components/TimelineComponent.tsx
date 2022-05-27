@@ -28,7 +28,7 @@ import {useFetch} from "../lib/useFetch";
 import {sortNFTs} from "../lib/sortNFTs";
 
 const TimelineComponent = () => {
-  const nftData = useFetch("https://pixelmap.art/nfts/all.json");
+  const nftData = useFetch("https://api.nftarchaeology.io/nfts");
   if (!nftData) {
     return <div>Loading...</div>;
   } else {
@@ -52,7 +52,7 @@ const TimelineComponent = () => {
 
                   <li key={key} className={`${key % 2 == 1 ? "timeline-inverted" : ""}`}>
                     <div className="timeline-badge ">
-                      <img src={item.logo}
+                      <img src={"https://api.nftarchaeology.io/" + item.logo}
                            alt="Axies"/>
                       <i className="tim-icons icon-gift-2"/>
                     </div>

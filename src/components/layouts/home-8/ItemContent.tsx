@@ -69,7 +69,7 @@ const ItemContent = (props: Props) => {
     },
   ]);
 
-  const nftData = useFetch("https://pixelmap.art/nfts/all.json");
+  const nftData = useFetch("https://api.nftarchaeology.io/nfts");
   const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
 
   const [visible, setVisible] = useState(15);
@@ -286,7 +286,7 @@ const ItemContent = (props: Props) => {
                         </div>
                         <div className="card-media">
                           <Link to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}>
-                            <img src={item.logo} alt="NFT Archaeology" />
+                            <img src={"https://api.nftarchaeology.io/" + item.logo} alt="NFT Archaeology" />
                           </Link>
                           <div className="featured-countdown">
                             <span className="slogan" />
