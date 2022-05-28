@@ -69,8 +69,18 @@ const ItemContent = (props: Props) => {
     },
   ]);
 
-  const nftData = useFetch("https://api.nftarchaeology.io/nfts");
+
   const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
+  const searchParams = new URLSearchParams;
+
+  if (props.contractStandardFilter) {
+    for (const standard of props.contractStandardFilter) {
+      if (standard.checked) {
+        searchParams.append('standard', standard.field)
+      }
+    }
+  }
+  const nftData = useFetch("https://api.nftarchaeology.io/nfts?" + searchParams);
 
   const [visible, setVisible] = useState(15);
   const showMoreItems = () => {
