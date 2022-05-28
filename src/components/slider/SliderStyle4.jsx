@@ -50,7 +50,7 @@ const SliderStyle4 = () => {
                             >
                                 <SwiperSlide><img src="https://pixelmap.io/assets/images/logo.png" alt="PixelMap" width="230px" /></SwiperSlide>
                                 <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1443910587218468869/4EnJz_Ps_400x400.jpg" width="230px" alt="Curio Cards" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1487535556212899841/deEDoQsq_400x400.png" width="230px" alt="MoonCatRescue" /></SwiperSlide>
+                                <SwiperSlide><img src="https://api.nftarchaeology.io/images/logo-mooncatrescue.png" width="230px" alt="MoonCatRescue" /></SwiperSlide>
                                 <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1468967145325223939/GGJZgiy0_400x400.jpg" width="230px" alt="Etheria" /></SwiperSlide>
                                 <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1464784539369181188/B1Mg3aDD_400x400.jpg" width="230px" alt="CryptoCats" /></SwiperSlide>
 
