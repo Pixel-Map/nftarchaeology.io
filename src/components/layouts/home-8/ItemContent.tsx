@@ -7,34 +7,31 @@ import { Dropdown } from "react-bootstrap";
 
 import img1 from "../../../assets/images/box-item/image-box-47.jpg";
 import imga1 from "../../../assets/images/avatar/author_rank.jpg";
-import img2 from "../../../assets/images/box-item/image-box-48.jpg";
-import imga2 from "../../../assets/images/avatar/avt-3.jpg";
 import discord from "../../../assets/images/logo/discord.jpeg";
 import twitter from "../../../assets/images/logo/twitter.png";
 import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
 import { useFetch } from "../../../lib/useFetch";
-import {getFilteredNFTs} from "../../../lib/getFilteredNFTs";
 import {sortNFTs} from "../../../lib/sortNFTs";
 
 interface Props {
-  contractStandardFilter: {
+  standard: {
     field: string,
     checked: boolean
   }[],
 
-  yearFilter: {
+  year: {
     field: string,
     checked: boolean
   }[],
 
-  assetStorageTypeFilter: {
+  assetDataLocation: {
     field: string,
     checked: boolean
   }[],
 }
 
-const ItemContent = (props: Props) => {
+function ItemContent(props: Props) {
   const [dataTab] = useState([
     {
       id: 1,
@@ -54,23 +51,30 @@ const ItemContent = (props: Props) => {
           nameAuthor: "Tyler Covington",
           price: "4.89 ETH",
           wishlist: "100",
-        },
-        {
-          id: 2,
-          img: img2,
-          title: "Hamlet Comtemplates... ",
-          tags: "bsc",
-          imgAuthor: imga2,
-          nameAuthor: "Freddie Carpeter",
-          price: "4.89 ETH",
-          wishlist: "100",
-        },
+        }
       ],
     },
   ]);
 
-  const nftData = useFetch("https://api.nftarchaeology.io/nfts");
+
   const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
+  const searchParams = new URLSearchParams;
+
+  // Iterate through all prop names and use them to talk to the API
+  for (const propName in props) {
+    const propValues =  props[propName as keyof typeof props]
+    // Only append if at least one is UNSET, otherwise we want everything!
+    // That way the API doesn't have to do needless filtering.
+    if (propValues.some(value => !value.checked)) {
+      for (const value of propValues) {
+        if (value.checked) {
+            searchParams.append(propName, value.field)
+        }
+      }
+    }
+  }
+
+  const nftData = useFetch("https://api.nftarchaeology.io/nfts?" + searchParams);
 
   const [visible, setVisible] = useState(15);
   const showMoreItems = () => {
@@ -115,8 +119,7 @@ const ItemContent = (props: Props) => {
     return <div>Loading...</div>;
   } else {
     // @ts-ignore
-    const filteredNFTs = getFilteredNFTs(nftData, props.assetStorageTypeFilter, props.yearFilter, props.contractStandardFilter)
-    const sortedNFTs = sortNFTs(filteredNFTs)
+    const sortedNFTs = sortNFTs(nftData)
     // @ts-ignore
     return (
       <Fragment>
@@ -430,6 +433,6 @@ const ItemContent = (props: Props) => {
       </Fragment>
     );
   }
-};
+}
 
 export default ItemContent;

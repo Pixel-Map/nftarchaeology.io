@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../components/header/HeaderStyle2';
 import ItemContent from '../components/layouts/home-8/ItemContent';
 import SideBar from '../components/layouts/home-8/SideBar';
 
 
 const Explore = () => {
-    const [yearFilter, setYearFilter] = useState([
+    const [isBusy, setBusy] = useState(true)
+    const [year, setYear] = useState([
         {
             field: '2015',
             checked: true
@@ -35,60 +36,47 @@ const Explore = () => {
             checked: true
         },
     ])
-    const [assetStorageTypeFilter, setAssetStorageTypeFilter] = useState([
-        {
-            field: 'Onchain',
-            checked: true
-        },
-        {
-            field: 'IPFS',
-            checked: true
-        },
-        {
-            field: 'Webserver',
-            checked: true
-        }
-    ])
-    const [contractStandardFilter, setContractStandardFilter] = useState([
-        {
-            field: 'Predates ERC-721',
-            checked: true
-        },
-        {
-            field: 'ERC-20',
-            checked: true
-        },
-        {
-            field: 'ERC-721',
-            checked: true
-        },
-        {
-            field: 'Predates ERC-1155',
-            checked: true
-        },
-        {
-            field: "ERC-1155",
-            checked: true
-        }
-    ])
+    const [assetDataLocation, setAssetDataLocation] = useState<any[]>([])
+    const [standard, setStandard] = useState<any[]>([])
+
+    useEffect(() => {
+        fetch('https://api.nftarchaeology.io/schema').then((response) => {
+            response.json().then((data) => {
+                const standards = []
+                for (const standard of data.components.schemas.Standard.enum) {
+                    standards.push({field: standard, checked: true})
+                }
+                setStandard(standards)
+
+                const assetDataLocations = []
+                for (const assetDataLocation of data.components.schemas.AssetDataLocation.enum) {
+                    assetDataLocations.push({field: assetDataLocation, checked: true})
+                }
+                setAssetDataLocation(assetDataLocations)
+
+                setBusy(false)
+            })
+        })
+    }, [])
+
 
     const yearHandler = (position: number) => {
-        const updatedYearFilter = yearFilter.map((item, index) =>
+        const updatedYear = year.map((item, index) =>
           index === position ? {field: item.field, checked: !item.checked} : item
         );
-        setYearFilter(updatedYearFilter);
+        setYear(updatedYear);
     };
-    const assetStorageTypeFilterHandler = (position: number) => {
-        const updatedassetStorageTypeFilterHandler = assetStorageTypeFilter.map((item, index) =>
+    const assetDataLocationHandler = (position: number) => {
+        const updatedAssetDataLocationHandler = assetDataLocation.map((item, index) =>
           index === position ? {field: item.field, checked: !item.checked} : item
         );
-        setAssetStorageTypeFilter(updatedassetStorageTypeFilterHandler);
+        setAssetDataLocation(updatedAssetDataLocationHandler);
     };
-    const contractHandler = (position: number) => {
-        const updatedContractStandardFilter = contractStandardFilter.map((item, index) =>
+    const standardHandler = (position: number) => {
+        const updatedStandard = standard.map((item, index) =>
           index === position ? {field: item.field, checked: !item.checked} : item
         );
-        setContractStandardFilter(updatedContractStandardFilter);
+        setStandard(updatedStandard);
     };
 
 
@@ -100,12 +88,14 @@ const Explore = () => {
                 <div className="themesflat-container">
                     <div className="row">
                         <div className="col-box-17">
-                            <SideBar yearFilter={yearFilter} yearHandler={yearHandler} assetStorageTypeFilterHandler={assetStorageTypeFilterHandler} assetStorageTypeFilter={assetStorageTypeFilter} contractStandardFilter={contractStandardFilter} contractStandardHandler={contractHandler} />
+                            {isBusy ? (<>Loading...</>) : (
+                            <SideBar year={year} yearHandler={yearHandler} assetDataLocationHandler={assetDataLocationHandler} assetDataLocation={assetDataLocation} standard={standard} standardHandler={standardHandler} />
+                              )}
+                        </div>
+                        <div className="col-box-83">
+                            <ItemContent year={year} assetDataLocation={assetDataLocation} standard={standard}  />
                         </div>
 
-                        <div className="col-box-83">
-                            <ItemContent yearFilter={yearFilter} assetStorageTypeFilter={assetStorageTypeFilter} contractStandardFilter={contractStandardFilter}  />
-                        </div>
                     </div>
                 </div>
             </section>

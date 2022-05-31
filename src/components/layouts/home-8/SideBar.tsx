@@ -2,23 +2,23 @@ import React from 'react';
 import { Accordion } from 'react-bootstrap-accordion';
 
 interface Props {
-  contractStandardFilter: {
+  standard: {
       field: string,
       checked: boolean
     }[],
-  contractStandardHandler: (position: number) => void;
+  standardHandler: (position: number) => void;
 
-  yearFilter: {
+  year: {
     field: string,
     checked: boolean
   }[],
   yearHandler: (position: number) => void;
 
-  assetStorageTypeFilter: {
+  assetDataLocation: {
     field: string,
     checked: boolean
   }[],
-  assetStorageTypeFilterHandler: (position: number) => void;
+  assetDataLocationHandler: (position: number) => void;
 
 
 }
@@ -39,7 +39,7 @@ const SideBar = (props: Props) => {
         <div className="widget widget-category boder-bt">
           <Accordion title="Year" show={true}>
             <form action="#">
-              {props.yearFilter.map((itemm, index) => (
+              {props.year.map((itemm, index) => (
                 <div key={index}>
                   <label>
                     <span>{itemm.field}</span>
@@ -57,12 +57,12 @@ const SideBar = (props: Props) => {
         <div className="widget widget-category boder-bt">
           <Accordion title="Asset Storage Type" show={true}>
             <form action="#">
-              {props.assetStorageTypeFilter.map((itemm, index) => (
+              {props.assetDataLocation.map((itemm, index) => (
                 <div key={index}>
                   <label>
                     <span>{itemm.field}</span>
                     <span className="pst-re">
-                      <input type="checkbox" onChange={() => props.assetStorageTypeFilterHandler(index)}  defaultChecked={true} />
+                      <input type="checkbox" onChange={() => props.assetDataLocationHandler(index)}  defaultChecked={true} />
                       <span className="btn-checkbox" />
                     </span>
                   </label>
@@ -75,12 +75,12 @@ const SideBar = (props: Props) => {
         <div className="widget widget-category boder-bt">
           <Accordion title="Contract Standard" show={true}>
             <form action="#">
-              {props.contractStandardFilter.map((itemm, index) => (
+              {props.standard.map((itemm, index) => (
                 <div key={index}>
                   <label>
                     <span>{itemm.field}</span>
                     <span className="pst-re">
-                      <input type="checkbox" onChange={() => props.contractStandardHandler(index)} defaultChecked={itemm.checked} />
+                      <input type="checkbox" onChange={() => props.standardHandler(index)} defaultChecked={itemm.checked} />
                       <span className="btn-checkbox" />
                     </span>
                   </label>
