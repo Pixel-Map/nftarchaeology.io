@@ -13,7 +13,7 @@ import {FlagsComponent} from "../components/flagsComponent";
 import {TwitterFollowButton} from "react-twitter-embed";
 import ReactMarkdown from 'react-markdown'
 
-const ItemDetails02 = () => {
+function ItemDetails02() {
     const {id} = useParams();
     const nftData = useFetch(`https://api.nftarchaeology.io/nfts/${id}`);
     const priceData = useFetch(`https://pixelmap.art/nfts/prices.json`);
