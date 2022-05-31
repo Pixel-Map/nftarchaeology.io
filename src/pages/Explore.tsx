@@ -26,18 +26,11 @@ const Explore = () => {
         {
             field: '2019',
             checked: true
-        },
-        {
-            field: '2020',
-            checked: true
-        },
-        {
-            field: '2021',
-            checked: true
-        },
+        }
     ])
     const [assetDataLocation, setAssetDataLocation] = useState<any[]>([])
     const [standard, setStandard] = useState<any[]>([])
+    const [categories, setCategories] = useState<any[]>([])
 
     useEffect(() => {
         fetch('https://api.nftarchaeology.io/schema').then((response) => {
@@ -53,6 +46,12 @@ const Explore = () => {
                     assetDataLocations.push({field: assetDataLocation, checked: true})
                 }
                 setAssetDataLocation(assetDataLocations)
+
+                const categories = []
+                for (const category of data.components.schemas.Category.enum) {
+                    categories.push({field: category, checked: true})
+                }
+                setCategories(categories)
 
                 setBusy(false)
             })
@@ -79,6 +78,12 @@ const Explore = () => {
         setStandard(updatedStandard);
     };
 
+    const categoriesHandler = (position: number) => {
+        const updatedCategories = categories.map((item, index) =>
+          index === position ? {field: item.field, checked: !item.checked} : item
+        );
+        setCategories(updatedCategories);
+    };
 
 
     return (
@@ -89,11 +94,11 @@ const Explore = () => {
                     <div className="row">
                         <div className="col-box-17">
                             {isBusy ? (<>Loading...</>) : (
-                            <SideBar year={year} yearHandler={yearHandler} assetDataLocationHandler={assetDataLocationHandler} assetDataLocation={assetDataLocation} standard={standard} standardHandler={standardHandler} />
+                            <SideBar year={year} yearHandler={yearHandler} assetDataLocationHandler={assetDataLocationHandler} assetDataLocation={assetDataLocation} standard={standard} standardHandler={standardHandler} categories={categories} categoriesHandler={categoriesHandler} />
                               )}
                         </div>
                         <div className="col-box-83">
-                            <ItemContent year={year} assetDataLocation={assetDataLocation} standard={standard}  />
+                            <ItemContent year={year} assetDataLocation={assetDataLocation} standard={standard} categories={categories}  />
                         </div>
 
                     </div>

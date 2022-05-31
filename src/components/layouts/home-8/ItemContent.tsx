@@ -29,6 +29,11 @@ interface Props {
     field: string,
     checked: boolean
   }[],
+
+  categories: {
+    field: string,
+    checked: boolean
+  }[]
 }
 
 function ItemContent(props: Props) {

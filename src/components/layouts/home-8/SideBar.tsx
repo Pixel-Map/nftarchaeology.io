@@ -20,6 +20,12 @@ interface Props {
   }[],
   assetDataLocationHandler: (position: number) => void;
 
+  categories: {
+    field: string,
+    checked: boolean
+  }[],
+  categoriesHandler: (position: number) => void;
+
 
 }
 
@@ -90,6 +96,25 @@ const SideBar = (props: Props) => {
             </form>
           </Accordion>
         </div>
+        <div className="widget widget-category boder-bt pb-40">
+          <Accordion title="Category" show={true}>
+            <form action="#">
+              {props.categories.map((itemm, index) => (
+                <div key={index}>
+                  <label>
+                    <span>{itemm.field}</span>
+                    <span className="pst-re">
+                      <input type="checkbox" onChange={() => props.categoriesHandler(index)} defaultChecked={itemm.checked} />
+                      <span className="btn-checkbox" />
+                    </span>
+                  </label>
+                  <br />
+                </div>
+              ))}
+            </form>
+          </Accordion>
+        </div>
+        <div className="pb-40 pt-40"></div>
       </div>
     </div>
   );
