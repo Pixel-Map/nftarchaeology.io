@@ -9,9 +9,39 @@ import 'swiper/scss/pagination';
 import shape1 from '../../assets/images/backgroup-secsion/bg-gradient1.png'
 import shape2 from '../../assets/images/backgroup-secsion/bg-gradient2.png'
 import shape3 from '../../assets/images/backgroup-secsion/bg-gradient3.png'
+import {useFetch} from "../../lib/useFetch";
+
+// Use this to randomize which NFTs are displayed on the front page
+function randomizeAndSplit(data, chunkSize) {
+    var arrayOfArrays = [];
+    var shuffled = [...data]; //make a copy so that we don't mutate the original array
+
+    //shuffle the elements
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    //split the shuffled version by the chunk size
+    for (var i=0; i<shuffled.length; i+=chunkSize) {
+        arrayOfArrays.push(shuffled.slice(i,i+chunkSize));
+    }
+    return arrayOfArrays;
+}
+
 
 const SliderStyle4 = () => {
-    
+    let randomized;
+    const nftData = useFetch(`https://api.nftarchaeology.io/nfts`)
+    if (!nftData) {
+        return <div>Loading...</div>;
+    } else {
+        randomized = randomizeAndSplit(nftData, 6)
+    }
+    if (!randomized) {
+        return <div>Loading...</div>
+    }
+    console.log(randomized)
     return (
         <div>
             <section className="flat-title-page style3 mainslider">
@@ -23,7 +53,7 @@ const SliderStyle4 = () => {
                         <div className="wrap-heading flat-slider flex">
                             <div className="content">
                                 <h2 className="heading mt-15">Discover, learn, collect
-                                </h2>	
+                                </h2>
                                 <h1 className="heading mb-style"><span className="tf-text s1">#HistoricalNFTs</span>
                                 </h1>
                                 <p className="sub-heading mt-19 mb-40">These NFTs are connections to earlier periods of crypto history, often uniquely crafted, created before standards existed, and now sought by collectors seeking rare and authentic pieces on the Blockchain.
@@ -48,12 +78,11 @@ const SliderStyle4 = () => {
                                 }}
                                 speed= {2000}
                             >
-                                <SwiperSlide><img src="https://pixelmap.io/assets/images/logo.png" alt="PixelMap" width="230px" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1443910587218468869/4EnJz_Ps_400x400.jpg" width="230px" alt="Curio Cards" /></SwiperSlide>
-                                <SwiperSlide><img src="https://api.nftarchaeology.io/images/logo-mooncatrescue.png" width="230px" alt="MoonCatRescue" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1468967145325223939/GGJZgiy0_400x400.jpg" width="230px" alt="Etheria" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1464784539369181188/B1Mg3aDD_400x400.jpg" width="230px" alt="CryptoCats" /></SwiperSlide>
-
+                                {
+                                    randomized[0].map((item,index) => (
+                                        <SwiperSlide key={index} item={item} ><a href={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}><img alt={item.key} src={`https://api.nftarchaeology.io/${item.logo}`} width="230px" /></a></SwiperSlide>
+                                    ))
+                                }
                             </Swiper>
                             <Swiper
                                 modules={[ Autoplay ]}
@@ -68,12 +97,11 @@ const SliderStyle4 = () => {
                                 }}
                                 speed= {1800}
                             >
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1477978145047339015/lRSBbcFW_400x400.jpg" width="230px" alt="Axies" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/media/FLljE9VXEAcFn5O?format=png&name=small" width="230px" alt="CryptoPunks" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1038100267764473856/-5YZzEIE_400x400.jpg" width="230px" alt="Axies" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pixelmap.art/nfts/images/logo-cryptoskulls.png" width="230px" alt="CryptoSkulls" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pixelmap.art/nfts/images/logo-pixelcons.png" alt="PixelCons" width="230px" /></SwiperSlide>
-
+                                {
+                                    randomized[1].map((item,index) => (
+                                        <SwiperSlide key={index} item={item} ><a href={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}><img alt={item.key} src={`https://api.nftarchaeology.io/${item.logo}`} width="230px" /></a></SwiperSlide>
+                                    ))
+                                }
                             </Swiper>
                             <Swiper
                                 modules={[ Autoplay ]}
@@ -88,15 +116,14 @@ const SliderStyle4 = () => {
                                 }}
                                 speed= {2200}
                             >
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1423335465881640967/Quu29IIF_400x400.png" width="230px" alt="CryptoArte" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1424089401106305026/ObSFZaMS_400x400.jpg" width="230px" alt="EtherRocks" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1432194219452502016/mpI5FvbO_400x400.jpg" width="230px" alt="Axies" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/1434169095428050944/wtllquM4_400x400.jpg" width="230px" alt="Pixereum" /></SwiperSlide>
-                                <SwiperSlide><img src="https://pbs.twimg.com/profile_images/954122555400638464/wP0a89Kq_400x400.jpg" width="230px" alt="EtherLambos" /></SwiperSlide>
-
+                                {
+                                    randomized[2].map((item,index) => (
+                                        <SwiperSlide key={index} item={item} ><a href={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}><img alt={item.key} src={`https://api.nftarchaeology.io/${item.logo}`} width="230px" /></a></SwiperSlide>
+                                    ))
+                                }
                             </Swiper>
                         </div>
-                        
+
                     </div>
             </section>
         </div>
