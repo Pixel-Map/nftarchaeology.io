@@ -11,6 +11,7 @@ import discord from "../../../assets/images/logo/discord.jpeg";
 import twitter from "../../../assets/images/logo/twitter.png";
 import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
+import a from "../../../assets/images/icon/a.png";
 import { useFetch } from "../../../lib/useFetch";
 import {sortNFTs} from "../../../lib/sortNFTs";
 
@@ -116,9 +117,12 @@ function ItemContent(props: Props) {
     gridContent?.current?.classList.add("open");
     // @ts-ignore
     listContent?.current?.classList.remove("open");
-
   };
 
+  function getGradeImage(grade: string) {
+    console.log(grade)
+    return a;
+  }
   const [modalShow, setModalShow] = useState(false);
   if (!nftData) {
     return <div>Loading...</div>;
@@ -252,8 +256,13 @@ function ItemContent(props: Props) {
                   {sortedNFTs.map((item: any, key: string | number | null | undefined) => (
                     <div key={key} className="col-item">
                       <div className="sc-card-product menu_card style-h7">
-                        <div className="meta-info style">
-                          <div className="author">
+                        <div className="meta-info style ">
+                          <div className="author mx-auto">
+                            <div className="avatar">
+                              <a href={item.discord}>
+                                <img src={getGradeImage(item.grade)} alt="Discord" />
+                              </a>
+                            </div>
                             <div className="avatar">
                               <a href={item.discord}>
                                 <img src={discord} alt="Discord" />
@@ -283,14 +292,7 @@ function ItemContent(props: Props) {
                               </h6>
                             </div>
                           </div>
-                          {prices &&
-                            prices
-                              .filter((nft: any) => nft.name == item.title)
-                              .map((filteredNFT: any) => (
-                                <button className="wishlist-button heart" key={item.title}>
-                                  <span className="number-like">{` Ξ${filteredNFT.stats.floor_price}`}</span>
-                                </button>
-                              ))}
+
                         </div>
                         <div className="card-media">
                           <Link to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}>
