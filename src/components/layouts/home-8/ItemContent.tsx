@@ -63,7 +63,7 @@ function ItemContent(props: Props) {
   ]);
 
 
-  const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
+  // const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
   const searchParams = new URLSearchParams;
 
   // Iterate through all prop names and use them to talk to the API
