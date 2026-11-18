@@ -12,7 +12,7 @@ import twitter from "../../../assets/images/logo/twitter.png";
 import website from "../../../assets/images/logo/website.png";
 import opensea from "../../../assets/images/logo/opensea.png";
 import a from "../../../assets/images/icon/a.png";
-import { useFetch } from "../../../lib/useFetch";
+import { filterNFTs } from "../../../lib/catalogue";
 import {sortNFTs} from "../../../lib/sortNFTs";
 
 interface Props {
@@ -63,24 +63,7 @@ function ItemContent(props: Props) {
   ]);
 
 
-  // const prices: any = useFetch("https://pixelmap.art/nfts/prices.json");
-  const searchParams = new URLSearchParams;
-
-  // Iterate through all prop names and use them to talk to the API
-  for (const propName in props) {
-    const propValues =  props[propName as keyof typeof props]
-    // Only append if at least one is UNSET, otherwise we want everything!
-    // That way the API doesn't have to do needless filtering.
-    if (propValues.some(value => !value.checked)) {
-      for (const value of propValues) {
-        if (value.checked) {
-            searchParams.append(propName, value.field)
-        }
-      }
-    }
-  }
-
-  const nftData = useFetch("https://api.nftarchaeology.io/nfts?" + searchParams);
+  const nftData = filterNFTs(props);
 
   const [visible, setVisible] = useState(15);
   const showMoreItems = () => {
@@ -296,7 +279,7 @@ function ItemContent(props: Props) {
                         </div>
                         <div className="card-media">
                           <Link to={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}>
-                            <img src={"https://api.nftarchaeology.io/" + item.logo} alt="NFT Archaeology" />
+                            <img src={item.logo} alt="NFT Archaeology" />
                           </Link>
                           <div className="featured-countdown">
                             <span className="slogan" />

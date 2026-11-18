@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# NFT Archaeology
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The existing React site, published as static files on Netlify. No API server or database is needed.
 
-## Available Scripts
+## Run locally
 
-In the project directory, you can run:
+Use Node 22 and npm:
 
-### `npm start`
+```sh
+npm ci
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`npm start`, `npm run build`, and `npm test` first download the pinned content from GitHub. Internet access and `tar` are required at build time. Visitors need neither GitHub nor the former API to load the catalogue or its images.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+npm test -- --watchAll=false
+npm run build
+```
 
-### `npm test`
+The deployable site is in `build/`. Generated files under `src/generated/` and copied images under `public/data/` are ignored by Git.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Source of truth and updates
 
-### `npm run build`
+All editorial data and images remain in [Pixel-Map/historicalNFTs](https://github.com/Pixel-Map/historicalNFTs). Edit YAML there, not in generated files here.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`historical-nfts.source.json` pins a full upstream commit SHA. Each build downloads that revision, validates records against its schema, checks image references and existing collection URLs, and generates the catalogue. An unavailable or invalid source fails the build rather than publishing an empty catalogue. The deployed `/data/source.json` records its provenance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To publish new content:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Merge YAML/image changes in `historicalNFTs`.
+2. Set `revision` in `historical-nfts.source.json` to that commit's full SHA.
+3. Run tests and the production build, then push this repo to the branch Netlify deploys.
 
-### `npm run eject`
+Data repo changes alone do not trigger publication. Pinning makes deployments repeatable and keeps unreviewed data changes out of production.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The original API's year, score, and grade calculations are preserved in `scripts/build-data.mjs`. When changing that upstream policy, update the build calculation too. The pinned source has one known schema violation: Angel Battles' excerpt exceeds 280 characters. The build accepts only that field/constraint at that exact revision and preserves the text. Resolve it upstream before advancing the pin.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Logos and Markdown images hosted on the old API are copied into `/data/images/`. External links and optional Twitter/Dune embeds remain external. The obsolete price feed and hardcoded USD conversion have been removed.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Netlify
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`netlify.toml` specifies Node 22, `npm run build`, and publish directory `build`. Keep the existing Netlify domain configuration.
 
-## Learn More
+The SPA rewrite in `public/_redirects` (also declared in Netlify config) preserves direct requests and refreshes for `/explore`, `/timeline`, `/faq`, and `/nft-details/:id`. Existing assets are served before the fallback. Unknown collection IDs show a recovery link instead of loading forever.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Push validated changes to the site's production branch to deploy through its existing Git integration. Alternatively, from an authenticated Netlify CLI:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+netlify deploy --dir=build --prod
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+No GitHub Pages setup or DNS change is necessary.

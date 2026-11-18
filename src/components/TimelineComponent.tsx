@@ -24,11 +24,11 @@ import {
   CardBody,
 } from "reactstrap";
 import { NFT } from "../interfaces/nft.interface";
-import {useFetch} from "../lib/useFetch";
+import {nfts} from "../lib/catalogue";
 import {sortNFTs} from "../lib/sortNFTs";
 
 const TimelineComponent = () => {
-  const nftData = useFetch("https://api.nftarchaeology.io/nfts");
+  const nftData = nfts;
   if (!nftData) {
     return <div>Loading...</div>;
   } else {
@@ -52,7 +52,7 @@ const TimelineComponent = () => {
 
                   <li key={key} className={`${key % 2 == 1 ? "timeline-inverted" : ""}`}>
                     <div className="timeline-badge ">
-                      <img src={"https://api.nftarchaeology.io/" + item.logo}
+                      <img src={item.logo}
                            alt="Axies"/>
                       <i className="tim-icons icon-gift-2"/>
                     </div>

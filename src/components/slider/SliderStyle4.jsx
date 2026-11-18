@@ -9,7 +9,7 @@ import 'swiper/scss/pagination';
 import shape1 from '../../assets/images/backgroup-secsion/bg-gradient1.png'
 import shape2 from '../../assets/images/backgroup-secsion/bg-gradient2.png'
 import shape3 from '../../assets/images/backgroup-secsion/bg-gradient3.png'
-import {useFetch} from "../../lib/useFetch";
+import {nfts} from "../../lib/catalogue";
 
 // Use this to randomize which NFTs are displayed on the front page
 function randomizeAndSplit(data, chunkSize) {
@@ -32,7 +32,7 @@ function randomizeAndSplit(data, chunkSize) {
 
 const SliderStyle4 = () => {
     let randomized;
-    const nftData = useFetch(`https://api.nftarchaeology.io/nfts`)
+    const nftData = nfts;
     if (!nftData) {
         return <div>Loading...</div>;
     } else {
@@ -41,7 +41,6 @@ const SliderStyle4 = () => {
     if (!randomized) {
         return <div>Loading...</div>
     }
-    console.log(randomized)
     return (
         <div>
             <section className="flat-title-page style3 mainslider">
@@ -80,7 +79,7 @@ const SliderStyle4 = () => {
                             >
                                 {
                                     randomized[0].map((item,index) => (
-                                        <SwiperSlide key={index} item={item} ><a href={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}><img alt={item.key} src={`https://api.nftarchaeology.io/${item.logo}`} width="230px" /></a></SwiperSlide>
+                                        <SwiperSlide key={index}><Link to={`/nft-details/${item.slug}`}><img alt={item.title} src={item.logo} width="230px" /></Link></SwiperSlide>
                                     ))
                                 }
                             </Swiper>
@@ -99,7 +98,7 @@ const SliderStyle4 = () => {
                             >
                                 {
                                     randomized[1].map((item,index) => (
-                                        <SwiperSlide key={index} item={item} ><a href={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}><img alt={item.key} src={`https://api.nftarchaeology.io/${item.logo}`} width="230px" /></a></SwiperSlide>
+                                        <SwiperSlide key={index}><Link to={`/nft-details/${item.slug}`}><img alt={item.title} src={item.logo} width="230px" /></Link></SwiperSlide>
                                     ))
                                 }
                             </Swiper>
@@ -118,7 +117,7 @@ const SliderStyle4 = () => {
                             >
                                 {
                                     randomized[2].map((item,index) => (
-                                        <SwiperSlide key={index} item={item} ><a href={`/nft-details/${item.title.replace(/\s+/g, '').toLowerCase()}`}><img alt={item.key} src={`https://api.nftarchaeology.io/${item.logo}`} width="230px" /></a></SwiperSlide>
+                                        <SwiperSlide key={index}><Link to={`/nft-details/${item.slug}`}><img alt={item.title} src={item.logo} width="230px" /></Link></SwiperSlide>
                                     ))
                                 }
                             </Swiper>

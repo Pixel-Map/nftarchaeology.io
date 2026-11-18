@@ -6,7 +6,7 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import etherscan from "../assets/images/logo/etherscan.jpg";
 import ethereum from '../assets/images/logo/ethereum.png'
-import {useFetch} from "../lib/useFetch";
+import {getNFT} from "../lib/catalogue";
 import {Timeline} from "react-twitter-widgets";
 import {Accordion} from "react-bootstrap-accordion";
 import {FlagsComponent} from "../components/flagsComponent";
@@ -15,11 +15,10 @@ import ReactMarkdown from 'react-markdown'
 
 function ItemDetails02() {
     const {id} = useParams();
-    const nftData = useFetch(`https://api.nftarchaeology.io/nfts/${id}`);
-    const priceData = useFetch(`https://pixelmap.art/nfts/prices.json`);
+    const nftData = getNFT(id);
 
     if (!nftData) {
-        return <div>Loading...</div>;
+        return <><Header/><main className="tf-section"><h1>Collection not found</h1><Link to="/explore">Browse all collections</Link></main><Footer/></>;
     } else {
         return (
             <div className='item-details'>
@@ -34,7 +33,7 @@ function ItemDetails02() {
                                     <div className="meta-title-item">
                                         <div className="left">
                                             <h1 className="heading text-center kheader">
-                                                <span>{nftData.logo && <img src={"https://api.nftarchaeology.io/" + nftData.logo} alt="logo" width="48px" />}</span>
+                                                <span>{nftData.logo && <img src={nftData.logo} alt="logo" width="48px" />}</span>
                                                 {nftData.title}</h1><br/>
                                         </div>
                                     </div>
@@ -125,19 +124,6 @@ function ItemDetails02() {
                                                 </ul>
                                             </div>
                                             <div className="item-style-2">
-                                                <div className="item meta-price">
-                                                    <span className="heading">Current Floor</span>
-                                                    <div className="price">
-                                                        <div className="price-box">
-                                                            {priceData && priceData.filter(nft => nft.name === nftData.title).map(filteredNFT => (
-                                                                <>
-                                                            <h5> {filteredNFT.stats.floor_price} ETH</h5>
-                                                            <span> (${Number(filteredNFT.stats.floor_price * 3136.89).toLocaleString()})</span>
-                                                                </>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <FlagsComponent flags={nftData.flags} />
 
                                             </div>
