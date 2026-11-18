@@ -5,8 +5,8 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Keep existing /explore, /timeline and /nft-details/:id links working.
+# Known routes have prerendered index.html files. Unknown routes get a real 404.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404

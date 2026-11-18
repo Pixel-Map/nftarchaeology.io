@@ -4,25 +4,29 @@
     <title>NFT Archaeology.io | Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <meta name="author" content="themesflat.com">
+    <meta name="description" content="A community archive of early Ethereum collections, original contracts, and historical research.">
+    <meta name="author" content="NFT Archaeology community">
 
     <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Theme Style -->
-    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/../assets/css/style.css">
+    <script>try{document.documentElement.dataset.theme=localStorage.getItem('nft-archive:theme')||'system'}catch(e){document.documentElement.dataset.theme='system'}</script>
 
     <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="assets/icon/Favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="%PUBLIC_URL%/assets/icon/Favicon.png">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZWMW8CH5L"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-KZWMW8CH5L');
+      if (['nftarchaeology.io','www.nftarchaeology.io'].includes(location.hostname)) {
+        var analytics = document.createElement('script');
+        analytics.async = true;
+        analytics.src = 'https://www.googletagmanager.com/gtag/js?id=G-KZWMW8CH5L';
+        document.head.appendChild(analytics);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KZWMW8CH5L');
+      }
     </script>
   </head>
   <body class="body">
