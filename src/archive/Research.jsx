@@ -652,10 +652,12 @@ export function ResearchContract() {
                   </p>
                 )}
                 <details className="faq-item">
-                  <summary>Captured ABI</summary>
+                  <summary>
+                    {artifact.recompiledABI ? "Recompiled ABI · matched deployment" : "Captured ABI"}
+                  </summary>
                   <pre>
                     {JSON.stringify(
-                      artifact.sourceResponse?.abi || [],
+                      artifact.recompiledABI?.abi || artifact.sourceResponse?.abi || [],
                       null,
                       2,
                     )}

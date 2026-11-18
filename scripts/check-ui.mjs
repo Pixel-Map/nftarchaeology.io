@@ -233,6 +233,8 @@ page.close();
 page = await load(etherIdLink);
 assert(page.doc.body.textContent.includes("byte for byte"));
 assert(page.doc.body.textContent.includes("Solidity 0.3.5"));
+await click(button(page.doc, "Inspect captured bytecode and verified source"));
+assert(page.doc.body.textContent.includes("Recompiled ABI · matched deployment"));
 page.close();
 page = await load("/research/0x92f9c5992c7a6141836e624dc02fc958b1ca187d");
 assert.equal(page.doc.querySelector("h1").textContent, "DocumentRegistry");
@@ -270,8 +272,8 @@ assert(
 page.close();
 assert.equal(
   fetches,
-  1,
-  "Only the explicit evidence inspection should fetch a local artifact.",
+  2,
+  "Only the two explicit evidence inspections should fetch local artifacts.",
 );
 console.log(
   `Production DOM checks passed: ${nfts.length} collection pages, static hydration, search/address matches, filtering, sorting, table, bookmarks, theme, compare, research funding/pagination, contract evidence and local draft persistence. Visual layout requires browser QA.`,

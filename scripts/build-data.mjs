@@ -251,9 +251,9 @@ try {
   )
     throw new Error("Research snapshot coverage or uniqueness mismatch.");
   const historyPath = path.join(researchPath, "history");
-  const [history, findings, balances, fundedFlows, sourceIndex, sourceLeads] =
+  const [history, findings, balances, fundedFlows, sourceIndex, sourceLeads, recompiledABIs] =
     await Promise.all(
-      ["evidence", "findings", "balances", "funded-flows", "source-index", "source-leads"]
+      ["evidence", "findings", "balances", "funded-flows", "source-index", "source-leads", "recompiled-abis"]
         .map(async (name) =>
           JSON.parse(await readFile(path.join(historyPath, `${name}.json`), "utf8")),
         ),
@@ -368,6 +368,12 @@ try {
     row.contractName = identifyContract(
       row, artifact.sourceResponse?.sources || {}, sourceLeads, sourceIndex,
     );
+    const recompiledABI = recompiledABIs[row.address];
+    if (recompiledABI && (
+      recompiledABI.runtimeSha256 !== row.runtimeSha256 ||
+      !Array.isArray(recompiledABI.abi) || !recompiledABI.abi.length
+    ))
+      throw new Error(`Invalid recompiled ABI: ${row.address}`);
     artifacts.push([
       row.address,
       Buffer.from(
@@ -379,6 +385,7 @@ try {
             history: evidence,
             fundedFlows: fundedFlows.records[row.address],
             relatedSources,
+            recompiledABI,
           },
           null,
           2,
