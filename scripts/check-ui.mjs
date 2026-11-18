@@ -229,6 +229,11 @@ page.close();
 page = await load("/research?q=EtherId");
 assert.equal(page.doc.querySelectorAll("tbody tr").length, 1);
 assert(page.doc.querySelector("tbody").textContent.includes("EtherId registrar"));
+const etherIdLink = page.doc.querySelector("tbody a").getAttribute("href");
+page.close();
+page = await load(etherIdLink);
+assert(page.doc.body.textContent.includes("byte for byte"));
+assert(page.doc.body.textContent.includes("Solidity 0.3.5"));
 page.close();
 const address =
   research.find(

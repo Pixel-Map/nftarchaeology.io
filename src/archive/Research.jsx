@@ -309,6 +309,12 @@ function DeploymentHistory({ history }) {
         <div className="callout">
           <strong>{finding.title || "Reviewed finding"}</strong>
           <p>{finding.finding}</p>
+          {finding.compilationEvidence && (
+            <p>
+              Reproduced with Solidity {finding.compilationEvidence.creationMatchCheckedWith}
+              {" · optimizer disabled"}
+            </p>
+          )}
           {finding.sourceFile && <p className="mono">{finding.sourceFile} · lines {finding.lines}</p>}
           {finding.references?.length > 0 && (
             <ul>
@@ -517,7 +523,7 @@ export function ResearchContract() {
                 <dd>{signalLabels[row.signal]}</dd>
               </div>
               <div>
-                <dt>Source lookup</dt>
+                <dt>Original source-provider lookup</dt>
                 <dd>
                   {row.sourceStatus === "available"
                     ? "Provider returned verified source"
