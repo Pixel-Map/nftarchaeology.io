@@ -26,6 +26,8 @@ Preview: http://127.0.0.1:5173. `build/` is the complete deployment. Build runs 
 
 ## Browsing and research tools
 
+The original dark purple palette, logo and Urbanist font are retained. The homepage has three upward-flowing NFT columns with a persistent pause/browse control, an accessible still-gallery mode, and reduced-motion support. Urbanist is self-hosted with its OFL license; typography and artwork do not depend on a third-party font service.
+
 - Collection search includes titles, descriptions, creators and original/wrapper addresses, case-insensitively.
 - Explore filters, sorting, table layout and saved-only views use URL parameters. Unselected facet groups mean any value; multiple values within a group are OR, groups combine with AND. Empty category options are omitted, and dynamic counts describe results within the other active filters.
 - Bookmarks, theme preference and per-contract evaluation drafts are browser-local. Blocked storage falls back to the current visit with a notice. Drafts can be downloaded or proposed through GitHub; they never modify source evidence or published classifications.

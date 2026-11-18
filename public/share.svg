@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#f5f3ed"/><path d="M65 70h1070M65 555h1070" stroke="#d7d9ce"/><text x="65" y="125" font-family="monospace" font-size="22" fill="#63665b">NFT ARCHAEOLOGY / ETHEREUM 2015–2019</text><text x="65" y="295" font-family="Georgia,serif" font-size="112" fill="#252821">Before the</text><text x="65" y="415" font-family="Georgia,serif" font-size="112" fill="#252821">standard<tspan fill="#5145a0">.</tspan></text><text x="65" y="515" font-family="sans-serif" font-size="25" fill="#63665b">Collections, contracts, and a paper trail worth following.</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#14141f"/>
+<path d="M900 0v630M1020 0v630M1140 0v630M800 120h400M800 240h400M800 360h400M800 480h400" stroke="#5142fc" opacity=".2"/>
+<rect x="900" y="120" width="120" height="120" fill="#5142fc" opacity=".3"/><rect x="1020" y="360" width="120" height="120" fill="#8654ff" opacity=".3"/>
+<image href="/brand/logo.png" x="65" y="45" width="300" height="84"/>
+<text x="65" y="250" font-family="Urbanist" font-weight="700" font-size="48" fill="#ffffff">Discover, learn, collect</text>
+<text x="65" y="370" font-family="Urbanist" font-weight="800" font-size="88" fill="#9b85ff">#HistoricalNFTs</text>
+<text x="65" y="460" font-family="Urbanist" font-size="28" fill="#b8b8c8">Collections, contracts, and early blockchain history.</text>
+<text x="65" y="555" font-family="Urbanist" font-size="23" fill="#ffffff">NFT Archaeology.io · Ethereum, 2015–2019</text>
+</svg>

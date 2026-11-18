@@ -68,14 +68,13 @@ export function Shell({ children }) {
       <header className="site-header">
         <div className="header-inner">
           <Link className="wordmark" to="/" aria-label="NFT Archaeology home">
-            <span className="monogram" aria-hidden="true">
-              N<span> / </span>A
-            </span>
-            <span>
-              NFT
-              <br />
-              <strong>ARCHAEOLOGY</strong>
-            </span>
+            <img
+              className="brand-logo"
+              src="/brand/logo.png"
+              alt="NFT Archaeology.io"
+              width="200"
+              height="56"
+            />
           </Link>
           <button
             className="menu-toggle"
@@ -97,10 +96,13 @@ export function Shell({ children }) {
               }
             }}
           >
-            <NavLink to="/explore">Collections</NavLink>
+            <NavLink to="/" end>
+              Home
+            </NavLink>
+            <NavLink to="/explore">Explore</NavLink>
             <NavLink to="/timeline">Timeline</NavLink>
             <NavLink to="/research">Needs research</NavLink>
-            <NavLink to="/about">About & contribute</NavLink>
+            <NavLink to="/faq">FAQ</NavLink>
             <Link to="/explore?saved=1">
               Saved <span className="count">{saved.length}</span>
             </Link>

@@ -13,6 +13,8 @@ const types = {
   ".jpeg": "image/jpeg",
   ".gif": "image/gif",
   ".xml": "application/xml",
+  ".ttf": "font/ttf",
+  ".woff2": "font/woff2",
 };
 http
   .createServer(async (request, response) => {
@@ -35,15 +37,17 @@ http
         target = path.join(root, "404.html");
         status = 404;
       }
+      const content = await readFile(target);
       response.writeHead(status, {
         "Content-Type":
           types[path.extname(target)] || "application/octet-stream",
         "Cache-Control": "no-store",
       });
-      response.end(await readFile(target));
+      response.end(content);
     } catch {
-      response.writeHead(500);
-      response.end("Preview error");
+      if (!response.headersSent)
+        response.writeHead(503, { "Retry-After": "1" });
+      response.end("Preview is rebuilding. Refresh in a moment.");
     }
   })
   .listen(5173, "127.0.0.1", () =>

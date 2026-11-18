@@ -17,7 +17,7 @@ const bundles = await Promise.all(
 );
 const pause = () => new Promise((resolve) => setTimeout(resolve, 25));
 let fetches = 0;
-async function load(route, storage = {}) {
+async function load(route, storage = {}, options = {}) {
   const url = new URL(route, "https://nftarchaeology.io");
   const file =
     url.pathname === "/"
@@ -41,6 +41,11 @@ async function load(route, storage = {}) {
   });
   const window = dom.window;
   window.scrollTo = () => {};
+  window.matchMedia = () => ({
+    matches: !!options.reducedMotion,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  });
   window.HTMLElement.prototype.scrollIntoView = () => {};
   window.HTMLDialogElement.prototype.showModal = function () {
     this.open = true;
@@ -129,6 +134,22 @@ for (const route of [
     assert(page.doc.body.textContent.includes("A trail gone cold"));
   page.close();
 }
+let galleryPage = await load("/");
+assert.equal(galleryPage.doc.querySelectorAll(".flow-column").length, 3);
+await click(button(galleryPage.doc, "Ⅱ Pause & browse"));
+assert(galleryPage.doc.querySelector(".flow-artwork.is-paused"));
+assert(
+  [
+    ...galleryPage.doc.querySelectorAll(".flow-group:not(.flow-duplicate) a"),
+  ].every((link) => link.tabIndex === 0),
+);
+await click(button(galleryPage.doc, "▶ Animate artwork"));
+assert(!galleryPage.doc.querySelector(".flow-artwork.is-paused"));
+galleryPage.close();
+galleryPage = await load("/", {}, { reducedMotion: true });
+assert(galleryPage.doc.querySelector(".flow-artwork.is-paused"));
+assert(button(galleryPage.doc, "Reduced motion: still gallery").disabled);
+galleryPage.close();
 let page = await load(
   "/explore?q=0X015A06A433353F8DB634DF4EDDF0C109882A15AB&view=table",
 );

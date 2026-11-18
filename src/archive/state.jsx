@@ -5,7 +5,7 @@ const ArchiveContext = createContext(null);
 export function ArchiveProvider({ children }) {
   const [saved, setSaved] = useState([]);
   const [compare, setCompare] = useState([]);
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState("dark");
   const [notice, setNotice] = useState("");
   useEffect(() => {
     try {
@@ -16,6 +16,7 @@ export function ArchiveProvider({ children }) {
       const preference = localStorage.getItem("nft-archive:theme");
       if (["light", "dark", "system"].includes(preference))
         setTheme(preference);
+      else if (localStorage.getItem("theme") === "light") setTheme("light");
     } catch {
       setNotice(
         "Browser storage is unavailable. Bookmarks will last for this visit.",

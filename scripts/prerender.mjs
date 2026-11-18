@@ -22,10 +22,23 @@ await build({
 const require = createRequire(import.meta.url);
 const { routes, render, metadataFor } = require(output);
 const template = await readFile(path.join(root, "build/index.html"), "utf8");
-const social = await readFile(path.join(root, "public/share.svg"), "utf8");
+const logo = (
+  await readFile(path.join(root, "public/brand/logo.png"))
+).toString("base64");
+const social = (
+  await readFile(path.join(root, "public/share.svg"), "utf8")
+).replace('href="/brand/logo.png"', `href="data:image/png;base64,${logo}"`);
 await writeFile(
   path.join(root, "build/share.png"),
-  new Resvg(social).render().asPng(),
+  new Resvg(social, {
+    font: {
+      fontFiles: [path.join(root, "public/brand/fonts/Urbanist.ttf")],
+      loadSystemFonts: false,
+      defaultFontFamily: "Urbanist",
+    },
+  })
+    .render()
+    .asPng(),
 );
 const escape = (value) =>
   value.replace(

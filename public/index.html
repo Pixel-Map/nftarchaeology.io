@@ -11,10 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Theme Style -->
-    <script>try{document.documentElement.dataset.theme=localStorage.getItem('nft-archive:theme')||'system'}catch(e){document.documentElement.dataset.theme='system'}</script>
+    <script>try{document.documentElement.dataset.theme=localStorage.getItem('nft-archive:theme')||(localStorage.getItem('theme')==='light'?'light':'dark')}catch(e){document.documentElement.dataset.theme='dark'}</script>
 
     <!-- Favicon and Touch Icons  -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/brand/favicon.png" type="image/png">
+    <link rel="preload" href="/brand/fonts/Urbanist.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="/brand/fonts/urbanist.css">
     <!-- Google tag (gtag.js) -->
     <script>
       if (['nftarchaeology.io','www.nftarchaeology.io'].includes(location.hostname)) {

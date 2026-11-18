@@ -29,7 +29,7 @@ export function metadataFor(pathname) {
   }
   const names = {
     "/": [
-      "Before the standard · NFT Archaeology",
+      "Historical NFTs · NFT Archaeology.io",
       `Explore ${nfts.length} documented Ethereum collections from 2015–2019, original contracts, and a separate research queue.`,
     ],
     "/explore": [

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { bySlug, nfts, unresolved, date } from "./data";
+import { nfts, unresolved } from "./data";
 import { CollectionCard, Search } from "./components";
+import FlowGallery from "./FlowGallery";
 
 export default function Home() {
-  const featured = bySlug.pixelmap || nfts[0];
   return (
     <>
       <section className="hero page-wrap">
@@ -13,11 +13,8 @@ export default function Home() {
             <span className="status-dot" /> A community archive · Ethereum,
             2015–2019
           </div>
-          <h1>
-            Before
-            <br />
-            the standard<span className="accent">.</span>
-          </h1>
+          <p className="hero-kicker">Discover, learn, collect</p>
+          <h1>#HistoricalNFTs</h1>
           <p className="lede">
             Explore the collections, contracts, and creative experiments from
             Ethereum’s earliest years.
@@ -40,24 +37,7 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <Link className="hero-art" to={`/nft-details/${featured.slug}`}>
-          <div className="art-corner">From the archive / 001</div>
-          <img
-            src={featured.logo}
-            alt={`${featured.title} artwork`}
-            width="540"
-            height="540"
-            fetchpriority="high"
-          />
-          <div className="hero-art-caption">
-            <span>
-              <strong>{featured.title}</strong>
-              <br />
-              {date(featured.deployedAt)}
-            </span>
-            <span aria-hidden="true">↗</span>
-          </div>
-        </Link>
+        <FlowGallery />
       </section>
       <section className="section page-wrap">
         <div className="section-heading">
