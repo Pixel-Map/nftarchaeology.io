@@ -53,6 +53,17 @@ export const options = Object.fromEntries(
     ].sort(),
   ]),
 );
+export const recordedSupply = (nft) =>
+  nft.totalSupply == null ? "Unknown" : nft.totalSupply.toLocaleString("en");
+
+export const fixedSupplyLabel = (nft) => {
+  if (nft.staticSupply == null) return "Unverified";
+  return nft.staticSupply ? "Recorded as fixed" : "Not recorded as fixed";
+};
+
+export const versionWrappers = (nft) =>
+  nft.contracts.filter((contract) => contract.role === "wrapper");
+
 export const shortAddress = (address) =>
   `${address.slice(0, 8)}…${address.slice(-6)}`;
 export const date = (iso) =>

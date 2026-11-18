@@ -218,14 +218,15 @@ try {
         "/data/",
       ),
     );
+    const legacyScore = nft.staticSupply == null ? null : score(nft);
     records.push({
       ...normalized,
       slug,
       logo: `/data/${nft.logo}`,
       year,
       deployedAt: deploymentISO(nft.creationTimestamp.trim()),
-      score: score(nft),
-      grade: grade(score(nft)),
+      score: legacyScore,
+      grade: legacyScore == null ? null : grade(legacyScore),
     });
   }
   if (!records.length)

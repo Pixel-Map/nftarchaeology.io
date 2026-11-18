@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { bySlug, nfts, date, marketURL, sourceFile, correction } from "./data";
+import { bySlug, nfts, date, marketURL, sourceFile, correction, recordedSupply, fixedSupplyLabel, versionWrappers } from "./data";
 import {
   CollectionActions,
   CollectionCard,
@@ -48,9 +48,9 @@ export default function Collection() {
     ...contract,
     role:
       nft.wrapperContract?.address.toLowerCase() ===
-      contract.address.toLowerCase()
+      contract.address.toLowerCase() || contract.role === "wrapper"
         ? "Wrapper contract"
-        : "Recorded contract",
+        : contract.role === "controller" ? "Controller contract" : "Recorded contract",
   }));
   if (
     nft.wrapperContract &&
@@ -117,14 +117,12 @@ export default function Collection() {
                     .replace("T", " ")
                     .replace(".000Z", " UTC"),
                 ],
-                ["Recorded supply", nft.totalSupply.toLocaleString("en")],
+                ["Recorded supply", recordedSupply(nft)],
                 ["Standard", nft.standard],
                 ["Asset storage", nft.assetDataLocation],
                 [
                   "Fixed supply",
-                  nft.staticSupply
-                    ? "Recorded as fixed"
-                    : "Not recorded as fixed",
+                  fixedSupplyLabel(nft),
                 ],
                 [
                   "Non-fungible",
@@ -145,7 +143,9 @@ export default function Collection() {
                   "Unwrap capability",
                   nft.wrapperContract
                     ? `${nft.wrapperContract.canUnwrapToOriginalToken ? "Recorded as supported" : "Recorded as unsupported"}; verify current conditions`
-                    : "No wrapper recorded",
+                    : versionWrappers(nft).length
+                      ? "Varies by version; see the contracts below"
+                      : "No wrapper recorded",
                 ],
               ].map(([label, value]) => (
                 <div key={label}>

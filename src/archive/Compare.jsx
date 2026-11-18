@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { bySlug, nfts, compareIds, date } from "./data";
+import { bySlug, nfts, compareIds, date, recordedSupply, fixedSupplyLabel, versionWrappers } from "./data";
 import { useArchive } from "./state";
 import { CopyAddress, Empty, PageHead } from "./components";
 
@@ -17,10 +17,10 @@ export default function Compare() {
     ["Deployment · UTC", (n) => date(n.deployedAt)],
     ["Standard", (n) => n.standard],
     ["Asset storage", (n) => n.assetDataLocation],
-    ["Recorded supply", (n) => n.totalSupply.toLocaleString("en")],
+    ["Recorded supply", recordedSupply],
     [
       "Fixed supply",
-      (n) => (n.staticSupply ? "Recorded as fixed" : "Not recorded as fixed"),
+      fixedSupplyLabel,
     ],
     ["Non-fungible", (n) => (n.nonfungible ? "Recorded yes" : "Recorded no")],
     [
@@ -49,7 +49,7 @@ export default function Compare() {
             </p>
           </>
         ) : (
-          "No wrapper recorded"
+          versionWrappers(n).length ? "Version-specific wrappers listed above" : "No wrapper recorded"
         ),
     ],
     [

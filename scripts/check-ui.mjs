@@ -208,6 +208,20 @@ assert(
   page.doc.querySelector(".collection-card").textContent.includes("PixelMap"),
 );
 page.close();
+page = await load("/nft-details/cryptocities");
+const cityFacts = [...page.doc.querySelectorAll("#facts dl div")];
+assert(cityFacts.some((fact) => fact.textContent === "Recorded supplyUnknown"));
+assert(cityFacts.some((fact) => fact.textContent === "Fixed supplyUnverified"));
+page.close();
+page = await load("/nft-details/etheria");
+assert(page.doc.body.textContent.includes("1,828"));
+assert(page.doc.body.textContent.includes("Varies by version"));
+assert(page.doc.querySelector('a[href*="0x169332ae7d143e4b5c6baedb2fef77bfbddb4011"]'));
+assert(!page.doc.querySelector('a[href*="0xcf684dfb8304729355b58315e8019b1aa2ad1bac"]'));
+page.close();
+page = await load("/nft-details/pridepunks");
+assert(page.doc.querySelector('a[href*="0x67401149e3e88b10dd92821eb6302f4dee8191bc"]'));
+page.close();
 page = await load("/compare?ids=pixelmap,etheria");
 assert.equal(page.doc.querySelectorAll("thead th").length, 3);
 await click(button(page.doc, "Remove"));

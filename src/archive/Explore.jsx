@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { facets, options, queryCollections, updateParam, date } from "./data";
+import { facets, options, queryCollections, updateParam, date, recordedSupply } from "./data";
 import { useArchive } from "./state";
 import {
   CollectionCard,
@@ -225,7 +225,7 @@ export default function Explore() {
                       <td>{date(nft.deployedAt)}</td>
                       <td>{nft.standard}</td>
                       <td>{nft.assetDataLocation}</td>
-                      <td>{nft.totalSupply.toLocaleString("en")}</td>
+                      <td>{recordedSupply(nft)}</td>
                       <td>
                         <ConcernBadge nft={nft} />
                       </td>
