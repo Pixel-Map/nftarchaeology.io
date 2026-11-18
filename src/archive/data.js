@@ -114,7 +114,7 @@ export function queryCollections(params, saved = [], omitFacet = "") {
 }
 
 export function researchName(row) {
-  return row.history?.finding?.title || row.name;
+  return row.history?.finding?.title || row.name || row.contractName?.name;
 }
 
 export function researchResults(params) {

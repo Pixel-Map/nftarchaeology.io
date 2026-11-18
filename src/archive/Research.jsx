@@ -233,10 +233,10 @@ export default function Research() {
                         to={`/research/${row.address}`}
                         state={{ from: location.pathname + location.search }}
                       >
-                        <strong>{researchName(row) || "Unnamed contract"}</strong>
-                        <span className="mono">
-                          {shortAddress(row.address)} ↗
-                        </span>
+                        <strong>{researchName(row) || shortAddress(row.address)}</strong>
+                        {researchName(row) && (
+                          <span className="mono">{shortAddress(row.address)} ↗</span>
+                        )}
                       </Link>
                     </th>
                     <td>
@@ -312,7 +312,8 @@ function DeploymentHistory({ history }) {
           {finding.compilationEvidence && (
             <p>
               Reproduced with Solidity {finding.compilationEvidence.creationMatchCheckedWith}
-              {" · optimizer disabled"}
+              {" · "}
+              {finding.compilationEvidence.optimizerEnabled ? "optimizer enabled" : "optimizer disabled"}
             </p>
           )}
           {finding.sourceFile && <p className="mono">{finding.sourceFile} · lines {finding.lines}</p>}
@@ -473,7 +474,7 @@ export function ResearchContract() {
             ? "Exact address match · existing catalogue"
             : "Needs research · classification unresolved"
         }
-        title={researchName(row) || "Unnamed contract"}
+        title={researchName(row) || shortAddress(row.address)}
       >
         <CopyAddress address={row.address} />
       </PageHead>
@@ -514,6 +515,10 @@ export function ResearchContract() {
                   {row.created} · original list
                 </dd>
               </div>
+              {row.contractName && <div>
+                <dt>Contract name evidence</dt>
+                <dd><a href={row.contractName.url}>{row.contractName.label} ↗</a></dd>
+              </div>}
               <div>
                 <dt>Source classification</dt>
                 <dd>{row.category || "Not specified"} · unverified label</dd>

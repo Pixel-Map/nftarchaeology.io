@@ -227,13 +227,19 @@ await click(button(page.doc, "Next →"));
 assert(page.window.location.search.includes("page=2"));
 page.close();
 page = await load("/research?q=EtherId");
-assert.equal(page.doc.querySelectorAll("tbody tr").length, 1);
 assert(page.doc.querySelector("tbody").textContent.includes("EtherId registrar"));
-const etherIdLink = page.doc.querySelector("tbody a").getAttribute("href");
+const etherIdLink = [...page.doc.querySelectorAll("tbody a")].find((link) => link.textContent.includes("EtherId registrar")).getAttribute("href");
 page.close();
 page = await load(etherIdLink);
 assert(page.doc.body.textContent.includes("byte for byte"));
 assert(page.doc.body.textContent.includes("Solidity 0.3.5"));
+page.close();
+page = await load("/research/0x92f9c5992c7a6141836e624dc02fc958b1ca187d");
+assert.equal(page.doc.querySelector("h1").textContent, "DocumentRegistry");
+assert(page.doc.body.textContent.includes("Contract name evidence"));
+page.close();
+page = await load("/research/0x6489fc370c7df314ee0bdfb1fbd185f1bc457d89");
+assert(page.doc.body.textContent.includes("optimizer enabled"));
 page.close();
 const address =
   research.find(

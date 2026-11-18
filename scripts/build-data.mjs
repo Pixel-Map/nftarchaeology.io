@@ -65,6 +65,43 @@ function deploymentISO(value) {
   return parsed.toISOString();
 }
 
+const isSolidityName = (name) =>
+  typeof name === "string" && /^[A-Za-z_$][A-Za-z0-9_$]{0,79}$/.test(name);
+
+function identifyContract(row, sources, sourceLeads, sourceIndex) {
+  if (row.name || row.history?.finding?.title) return;
+  const archived = sourceLeads.ethereumHistory[row.address];
+  if (isSolidityName(archived?.etherscan_contract_name))
+    return {
+      name: archived.etherscan_contract_name,
+      label: "Explorer name recorded by Ethereum History",
+      url: archived.url,
+    };
+  const files = Object.values(sources);
+  if (row.sourceRuntimeAgrees && files.length === 1) {
+    const text = files[0]?.content || "";
+    const definitions = Array.from(
+      text.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, "").matchAll(/\bcontract\s+([A-Za-z_$][\w$]*)\s*(?=\{|is\b)/g),
+      (match) => match[1],
+    );
+    if (definitions.length === 1 && isSolidityName(definitions[0]))
+      return { name: definitions[0], label: "Solidity contract declaration", url: row.sourceURL };
+  }
+  const repository = "tintinweb/smart-contract-sanctuary-ethereum";
+  const index = sourceIndex[repository];
+  const matches = index?.matches[row.address] || [];
+  if (matches.length === 1) {
+    const match = matches[0];
+    const name = path.basename(match.path).match(/^[0-9a-f]{40}_(.+)\.sol$/i)?.[1];
+    if (isSolidityName(name))
+      return {
+        name,
+        label: "Name in the archived explorer source",
+        url: `https://github.com/${repository}/blob/${index.reference}/${encodeURI(match.path)}`,
+      };
+  }
+}
+
 const root = fileURLToPath(new URL("../", import.meta.url));
 const source = JSON.parse(
   await readFile(path.join(root, "historical-nfts.source.json"), "utf8"),
@@ -328,6 +365,9 @@ try {
         : []),
       ...archivedSources,
     ];
+    row.contractName = identifyContract(
+      row, artifact.sourceResponse?.sources || {}, sourceLeads, sourceIndex,
+    );
     artifacts.push([
       row.address,
       Buffer.from(
