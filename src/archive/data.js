@@ -113,6 +113,10 @@ export function queryCollections(params, saved = [], omitFacet = "") {
   );
 }
 
+export function researchName(row) {
+  return row.history?.finding?.title || row.name;
+}
+
 export function researchResults(params) {
   const q = text(params.get("q")).trim();
   return candidates
@@ -122,6 +126,7 @@ export function researchResults(params) {
         (!q ||
           text(
             [
+              researchName(row),
               row.name,
               row.address,
               row.category,
@@ -135,7 +140,7 @@ export function researchResults(params) {
     )
     .sort((a, b) =>
       params.get("sort") === "name"
-        ? (a.name || a.address).localeCompare(b.name || b.address)
+        ? (researchName(a) || a.address).localeCompare(researchName(b) || b.address)
         : (params.get("sort") === "newest" ? -1 : 1) *
           a.created.localeCompare(b.created),
     );

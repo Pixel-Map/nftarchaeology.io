@@ -215,6 +215,8 @@ assert.equal(page.doc.querySelectorAll("thead th").length, 2);
 page.close();
 
 page = await load("/research?funded=1&sort=eth");
+assert(!page.doc.body.textContent.includes("ETH held is not ETH claimable."));
+assert(page.doc.body.textContent.includes("EtherId registrar (June 2016)"));
 const balances = [...page.doc.querySelectorAll("tbody tr")].map(
   (row) => row.children[4].childNodes[0].textContent,
 );
@@ -224,13 +226,21 @@ for (let i = 1; i < balances.length; i++)
 await click(button(page.doc, "Next →"));
 assert(page.window.location.search.includes("page=2"));
 page.close();
+page = await load("/research?q=EtherId");
+assert.equal(page.doc.querySelectorAll("tbody tr").length, 1);
+assert(page.doc.querySelector("tbody").textContent.includes("EtherId registrar"));
+page.close();
 const address =
   research.find(
     (row) => row.sourceRuntimeAgrees && row.preliminaryNotes?.length,
   )?.address || research[0].address;
 page = await load("/research/" + address);
+assert(page.doc.body.textContent.includes("Deployment and activity"));
+assert(page.doc.body.textContent.includes("Refreshed balance at block 26,444,268"));
 await click(button(page.doc, "Inspect captured bytecode and verified source"));
 assert(page.doc.querySelector(".bytecode").textContent.startsWith("0x"));
+assert(page.doc.body.textContent.includes("Creation transaction"));
+assert(page.doc.body.textContent.includes("Indexed ETH flow samples"));
 const worksheet = page.doc.querySelector(".research-worksheet");
 await change(page.window, worksheet.querySelector("select"), "Possible NFT");
 worksheet.dispatchEvent(

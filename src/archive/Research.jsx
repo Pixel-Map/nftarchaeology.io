@@ -10,6 +10,7 @@ import {
   unresolved,
   researchSource,
   researchResults,
+  researchName,
   updateParam,
   shortAddress,
   correction,
@@ -105,16 +106,19 @@ export default function Research() {
           <span>Ethereum snapshot block</span>
         </div>
       </div>
-      <div className="callout">
-        <strong>ETH held is not ETH claimable.</strong>
-        <p>
-          Balances are a snapshot, not a recovery estimate. Contract
-          permissions, beneficiaries, liabilities, and withdrawal conditions
-          still need review. Source categories and selector matches do not
-          establish NFT status or entitlement to funds.
-        </p>
-        <Link to="/about#research-method">Read the research method →</Link>
-      </div>
+      <section className="record-section">
+        <h2>Research highlights</h2>
+        <ul className="method-list">
+          {candidates.filter((row) => row.history?.finding?.title).map((row) => (
+            <li key={row.address}>
+              <Link to={`/research/${row.address}`}>{row.history.finding.title} →</Link>
+            </li>
+          ))}
+        </ul>
+        <a href={`${source.repository}/tree/${source.revision}/research/etherr/history`}>
+          Full deployment, activity and balance dataset ↗
+        </a>
+      </section>
       <p>
         <Link className="button" to="/research?funded=1&sort=eth">
           Review contracts holding ETH ↗
@@ -229,7 +233,7 @@ export default function Research() {
                         to={`/research/${row.address}`}
                         state={{ from: location.pathname + location.search }}
                       >
-                        <strong>{row.name || "Unnamed contract"}</strong>
+                        <strong>{researchName(row) || "Unnamed contract"}</strong>
                         <span className="mono">
                           {shortAddress(row.address)} ↗
                         </span>
@@ -277,6 +281,111 @@ export default function Research() {
         </>
       )}
     </div>
+  );
+}
+
+function DeploymentHistory({ history }) {
+  const {
+    deploymentBlock: block, deploymentDate: date, finding,
+    nextCheck, balanceWei, balanceBlock,
+  } = history;
+  return (
+    <section className="record-section">
+      <h2>Deployment and activity</h2>
+      <dl className="facts-grid">
+        <div>
+          <dt>Indexed deployment</dt>
+          <dd>
+            {date && `${date} UTC · `}
+            <a href={`https://etherscan.io/block/${block}`}>Block {block.toLocaleString("en")} ↗</a>
+          </dd>
+        </div>
+        {balanceBlock && <div>
+          <dt>Refreshed balance at block {balanceBlock.toLocaleString("en")}</dt>
+          <dd className="mono break">{balanceWei} wei</dd>
+        </div>}
+      </dl>
+      {finding && (
+        <div className="callout">
+          <strong>{finding.title || "Reviewed finding"}</strong>
+          <p>{finding.finding}</p>
+          {finding.sourceFile && <p className="mono">{finding.sourceFile} · lines {finding.lines}</p>}
+          {finding.references?.length > 0 && (
+            <ul>
+              {finding.references.map((url, index) => (
+                <li key={url}><a href={url}>Evidence {index + 1} ↗</a></li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+      <p><strong>Next check.</strong> {finding?.nextCheck || nextCheck}</p>
+    </section>
+  );
+}
+
+function HistorySamples({ artifact }) {
+  const transactions = artifact.history?.directActivity?.rows || [];
+  const flows = artifact.fundedFlows;
+  const creation = artifact.history?.creation?.rows?.[0];
+  const firstCall = artifact.history?.firstSuccessfulDirectCallSample;
+  return (
+    <>
+      {creation && (
+        <dl className="facts-grid">
+          <div>
+            <dt>Creation transaction</dt>
+            <dd><a href={`https://etherscan.io/tx/${creation.txHash}`}>{shortAddress(creation.txHash)} ↗</a></dd>
+          </div>
+          <div>
+            <dt>{creation.contractFactory ? "Deploying factory" : "Deployer"}</dt>
+            <dd><ContractLink address={creation.contractFactory || creation.contractCreator} /></dd>
+          </div>
+          {firstCall && (
+            <div>
+              <dt>Early successful direct call</dt>
+              <dd><a href={`https://etherscan.io/tx/${firstCall}`}>{shortAddress(firstCall)} ↗</a></dd>
+            </div>
+          )}
+        </dl>
+      )}
+      {artifact.history && (
+        <details className="faq-item">
+          <summary>Indexed direct transactions · {transactions.length} sampled</summary>
+          {transactions.length ? (
+            <ul className="method-list">
+              {transactions.map((tx) => (
+                <li key={tx.hash}>
+                  <a href={`https://etherscan.io/tx/${tx.hash}`}>{shortAddress(tx.hash)} ↗</a>
+                  {" · "}block {Number(tx.blockNumber).toLocaleString("en")}
+                  {" · "}{tx.methodId || "no method ID"}
+                </li>
+              ))}
+            </ul>
+          ) : <p>No direct transactions returned by the indexed query.</p>}
+        </details>
+      )}
+      {flows && (
+        <details className="faq-item">
+          <summary>Indexed ETH flow samples</summary>
+          {["inbound", "outbound"].map((direction) => (
+            <div key={direction}>
+              <h3>{direction === "inbound" ? "Inbound" : "Outbound"}</h3>
+              {flows[direction]?.samples?.length ? (
+                <ul className="method-list">
+                  {flows[direction].samples.map((tx) => (
+                    <li key={`${tx.txHash}:${tx.opIndex}`}>
+                      <a href={`https://etherscan.io/tx/${tx.txHash}`}>{shortAddress(tx.txHash)} ↗</a>
+                      {" · "}{tx.value} wei
+                    </li>
+                  ))}
+                </ul>
+              ) : <p>No transfers returned in this sample.</p>}
+            </div>
+          ))}
+        </details>
+      )}
+    </>
   );
 }
 
@@ -358,7 +467,7 @@ export function ResearchContract() {
             ? "Exact address match · existing catalogue"
             : "Needs research · classification unresolved"
         }
-        title={row.name || "Unnamed contract"}
+        title={researchName(row) || "Unnamed contract"}
       >
         <CopyAddress address={row.address} />
       </PageHead>
@@ -396,8 +505,7 @@ export function ResearchContract() {
               <div>
                 <dt>Source deployment date</dt>
                 <dd>
-                  {row.created} · source assertion, not independently
-                  reconstructed
+                  {row.created} · original list
                 </dd>
               </div>
               <div>
@@ -442,6 +550,7 @@ export function ResearchContract() {
               investigation.
             </p>
           </section>
+          {row.history && <DeploymentHistory history={row.history} />}
           <section className="record-section">
             <h2>Contract evidence.</h2>
             <p>
@@ -454,7 +563,7 @@ export function ResearchContract() {
                 href={`/data/contracts/${row.address}.json`}
                 download
               >
-                Download runtime code, source & ABI ↓
+                Download contract evidence JSON ↓
               </a>
             </p>
             <p className="mono break muted">
@@ -498,12 +607,23 @@ export function ResearchContract() {
               </>
             ) : (
               <div>
+                <HistorySamples artifact={artifact} />
                 <details className="faq-item">
                   <summary>
                     Deployed runtime bytecode · {row.codeBytes} bytes
                   </summary>
                   <pre className="bytecode">{artifact.runtimeBytecode}</pre>
                 </details>
+                {artifact.relatedSources?.length > 0 && (
+                  <>
+                    <h3>Related source archives</h3>
+                    <ul className="method-list">
+                      {artifact.relatedSources.map(({ title, url }) => (
+                        <li key={url}><a href={url}>{title} ↗</a></li>
+                      ))}
+                    </ul>
+                  </>
+                )}
                 {Object.entries(providerSources).map(([name, value]) => (
                   <details className="faq-item" key={name}>
                     <summary>{name}</summary>
@@ -634,8 +754,7 @@ export function ResearchContract() {
             Versioned research artifacts ↗
           </a>
           <p className="muted">
-            Human review: not recorded. Source runtime matching is reported
-            independently of NFT classification.
+            Source runtime matching is reported independently of NFT classification.
           </p>
         </aside>
       </div>

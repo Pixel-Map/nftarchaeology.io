@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes, useLocation, Navigate } from "react-router-dom";
-import { nfts, candidates, bySlug } from "./data";
+import { nfts, candidates, bySlug, researchName } from "./data";
 import { ArchiveProvider } from "./state";
 import { Shell } from "./components";
 import Home from "./Home";
@@ -23,7 +23,7 @@ export function metadataFor(pathname) {
     const row = candidates.find((item) => item.address === id?.toLowerCase());
     if (row)
       return {
-        title: `${row.name || row.address} · the 0xzxch list`,
+        title: `${researchName(row) || row.address} · the 0xzxch list`,
         description: `Unresolved research contract ${row.address}. Block-pinned runtime code, ETH balance, source evidence, and an evaluation worksheet. Inclusion does not establish NFT status.`,
       };
   }

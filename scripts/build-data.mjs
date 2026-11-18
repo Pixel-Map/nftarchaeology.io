@@ -213,6 +213,27 @@ try {
       research.length
   )
     throw new Error("Research snapshot coverage or uniqueness mismatch.");
+  const historyPath = path.join(researchPath, "history");
+  const [history, findings, balances, fundedFlows, sourceIndex, sourceLeads] =
+    await Promise.all(
+      ["evidence", "findings", "balances", "funded-flows", "source-index", "source-leads"]
+        .map(async (name) =>
+          JSON.parse(await readFile(path.join(historyPath, `${name}.json`), "utf8")),
+        ),
+    );
+  if (
+    history.chainId !== researchSource.chainId ||
+    history.throughBlock !== researchSource.blockNumber ||
+    balances.chainId !== researchSource.chainId ||
+    fundedFlows.blockHash !== balances.blockHash
+  )
+    throw new Error("Research history snapshot identity mismatch.");
+  const historyAddresses = new Set(research.map((row) => row.address));
+  if (Object.keys(history.records).some((address) => !historyAddresses.has(address)))
+    throw new Error("Unknown address in research history.");
+  const familyFindings = new Map(
+    findings.families.map((finding) => [finding.runtimeSha256, finding]),
+  );
   const artifacts = [];
   for (const row of research) {
     if (
@@ -264,6 +285,49 @@ try {
       throw new Error(
         `Source-reading note lacks matching source: ${row.address}`,
       );
+    const evidence = history.records[row.address];
+    const historicalBalance = balances.balanceWei[row.address];
+    if (evidence) {
+      const creation = evidence.creation?.rows?.[0];
+      if (
+        evidence.snapshotBalanceWei !== row.balanceWei ||
+        evidence.creation.status !== "observed" ||
+        creation?.contractAddress.toLowerCase() !== row.address ||
+        !/^0x[0-9a-f]{64}$/i.test(creation.txHash) ||
+        !/^\d+$/.test(creation.blockNumber) ||
+        Number(creation.blockNumber) > history.throughBlock
+      )
+        throw new Error(`Invalid deployment evidence: ${row.address}`);
+      row.history = {
+        deploymentBlock: Number(creation.blockNumber),
+        deploymentDate: creation.timeStamp
+          ? new Date(Number(creation.timeStamp) * 1000).toISOString().slice(0, 10)
+          : null,
+        finding: findings.addresses[row.address] || familyFindings.get(row.runtimeSha256),
+        nextCheck: evidence.nextCheck,
+        ...(historicalBalance !== undefined
+          ? { balanceWei: historicalBalance, balanceBlock: balances.blockNumber }
+          : {}),
+      };
+    }
+    if (row.balanceWei !== "0" && !/^\d+$/.test(historicalBalance))
+      throw new Error(`Missing refreshed balance: ${row.address}`);
+    const archivedSources = Object.entries(sourceIndex).flatMap(([repository, index]) =>
+      (index.matches[row.address] || []).map((match) => ({
+        title: repository,
+        url: `https://github.com/${repository}/blob/${index.reference}/${encodeURI(match.path)}`,
+      })),
+    );
+    const relatedSources = [
+      ...(sourceLeads.communitySource[row.address] || []).map((match) => ({
+        title: match.label,
+        url: match.source,
+      })),
+      ...(sourceLeads.ethereumHistory[row.address]?.url
+        ? [{ title: "Ethereum History", url: sourceLeads.ethereumHistory[row.address].url }]
+        : []),
+      ...archivedSources,
+    ];
     artifacts.push([
       row.address,
       Buffer.from(
@@ -272,6 +336,9 @@ try {
             ...artifact,
             sourceRevision: source.revision,
             listAttribution: researchSource.attribution,
+            history: evidence,
+            fundedFlows: fundedFlows.records[row.address],
+            relatedSources,
           },
           null,
           2,
